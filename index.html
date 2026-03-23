@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Taehyeon Kim</title>
 
-  <!-- Google Fonts: Cormorant Garamond + Jost -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── Design tokens ─────────────────────────────────────────── */
+    /* ─── Tokens ─────────────────────────────────────────── */
     :root {
       --bg-left:        #EAE5DC;
       --bg-left-deep:   #D8D0C4;
@@ -20,42 +19,31 @@
       --text-secondary: #6A6155;
       --text-muted:     #9B9181;
       --text-faint:     #C8C2B4;
-      --accent-italic:  #B0A490;
       --rule-color:     #E4DFD6;
       --avatar-bg:      #C4BAA8;
       --avatar-border:  #B8B0A0;
-      --avatar-text:    #7A705E;
       --available:      #8A9B8A;
     }
 
-    /* ─── Reset ─────────────────────────────────────────────────── */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* ─── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       height: 100%;
-    }
-
-    body {
       font-family: 'Jost', sans-serif;
       font-weight: 300;
       color: var(--text-primary);
       background: var(--bg-right);
-      height: 100vh;
       overflow: hidden;
     }
 
-    /* ─── Two-column layout ──────────────────────────────────────── */
+    /* ─── Layout ─────────────────────────────────────────── */
     main {
       display: flex;
       height: 100vh;
-      overflow: hidden;
     }
 
-    /* ─── LEFT PANEL ─────────────────────────────────────────────── */
+    /* ─── LEFT PANEL ─────────────────────────────────────── */
     .panel-left {
       width: 45%;
       flex-shrink: 0;
@@ -66,8 +54,6 @@
       padding: 2.5rem;
       border-right: 0.5px solid var(--rule-color);
       position: relative;
-
-      /* Entry animation */
       animation: slideInLeft 0.6s ease-out both;
     }
 
@@ -76,49 +62,31 @@
       to   { opacity: 1; transform: translateX(0); }
     }
 
-    /* Avatar */
     .avatar {
       width: 110px;
       height: 110px;
       border-radius: 50%;
       background: var(--avatar-bg);
       border: 0.5px solid var(--avatar-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 0.5rem;
-      flex-shrink: 0;
       overflow: hidden;
+      flex-shrink: 0;
+      margin-top: 0.5rem;
     }
 
-    .avatar-initials {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: 2rem;
-      color: var(--avatar-text);
-      letter-spacing: 0.05em;
-      user-select: none;
-    }
-
-    .avatar img.avatar-photo {
+    .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50%;
-      /* Crops to Taehyeon's face in the foreground of the group photo */
       object-position: 88% 92%;
       transform: scale(2.6);
       transform-origin: 88% 92%;
     }
 
-    /* Availability badge — sits just below avatar */
     .availability {
       margin-top: 1.1rem;
       display: flex;
       align-items: center;
       gap: 0.45rem;
-      font-family: 'Jost', sans-serif;
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 0.18em;
@@ -131,10 +99,8 @@
       height: 6px;
       border-radius: 50%;
       background: var(--available);
-      flex-shrink: 0;
     }
 
-    /* Bottom area: quote + location pinned to bottom */
     .panel-left-bottom {
       position: absolute;
       bottom: 2.5rem;
@@ -153,16 +119,6 @@
       margin-bottom: 1rem;
     }
 
-    .location {
-      font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    /* Hairline divider above location */
     .left-rule {
       width: 24px;
       height: 0.5px;
@@ -170,16 +126,20 @@
       margin: 0 auto 0.9rem;
     }
 
-    /* ─── RIGHT PANEL ────────────────────────────────────────────── */
+    .location {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── RIGHT PANEL ────────────────────────────────────── */
     .panel-right {
       flex: 1;
       background: var(--bg-right);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2.5rem;
-
-      /* Entry animation */
+      overflow: hidden;
+      position: relative;
       animation: fadeIn 0.5s ease-out 0.2s both;
     }
 
@@ -188,14 +148,28 @@
       to   { opacity: 1; }
     }
 
-    /* ── Top section ── */
-    .panel-top {
+    /* ─── View system ────────────────────────────────────── */
+    /* Each view sits absolutely inside panel-right and fades in/out */
+    .view {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
+      padding: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
     }
 
+    .view.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── HOME ── */
+    #view-home { justify-content: space-between; }
+
     .role-tag {
-      font-family: 'Jost', sans-serif;
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 0.2em;
@@ -207,14 +181,13 @@
     .name {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: 3rem;        /* ~48px */
+      font-size: 3rem;
       line-height: 1.15;
       color: var(--text-primary);
       margin-bottom: 1.1rem;
       letter-spacing: -0.01em;
     }
 
-    /* Thin rule between name and bio */
     .name-rule {
       width: 30px;
       height: 0.5px;
@@ -223,25 +196,20 @@
     }
 
     .bio {
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
       font-size: 0.875rem;
       color: var(--text-secondary);
       line-height: 1.7;
       max-width: 34ch;
     }
 
-    /* ── Bottom: navigation ── */
-    nav {
-      border-top: 0.5px solid var(--rule-color);
-    }
+    /* Nav */
+    nav { border-top: 0.5px solid var(--rule-color); }
 
     nav a {
       display: flex;
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      font-family: 'Jost', sans-serif;
       font-size: 12px;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -250,61 +218,235 @@
       padding: 0.75rem 0;
       border-bottom: 0.5px solid var(--rule-color);
       transition: color 0.2s;
+      cursor: pointer;
     }
 
-    nav a:hover {
-      color: var(--text-primary);
-    }
+    nav a:hover { color: var(--text-primary); }
 
-    /* Arrow shifts right on hover */
     nav a .arrow {
       display: inline-block;
       transition: transform 0.2s;
     }
 
-    nav a:hover .arrow {
-      transform: translateX(4px);
-    }
+    nav a:hover .arrow { transform: translateX(4px); }
 
-    /* Staggered nav entry animations */
-    nav a {
-      animation: navSlideUp 0.4s ease-out both;
-    }
-
-    nav a:nth-child(1) { animation-delay: 0.35s; }
-    nav a:nth-child(2) { animation-delay: 0.45s; }
-    nav a:nth-child(3) { animation-delay: 0.55s; }
-    nav a:nth-child(4) { animation-delay: 0.65s; }
-    nav a:nth-child(5) { animation-delay: 0.75s; }
+    nav a:nth-child(1) { animation: navSlideUp 0.4s ease-out 0.35s both; }
+    nav a:nth-child(2) { animation: navSlideUp 0.4s ease-out 0.45s both; }
+    nav a:nth-child(3) { animation: navSlideUp 0.4s ease-out 0.55s both; }
+    nav a:nth-child(4) { animation: navSlideUp 0.4s ease-out 0.65s both; }
+    nav a:nth-child(5) { animation: navSlideUp 0.4s ease-out 0.75s both; }
 
     @keyframes navSlideUp {
       from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── Responsive — stack on narrow viewports ─────────────────── */
-    @media (max-width: 700px) {
-      body {
-        height: auto;
-        overflow: auto;
-      }
+    /* ── Section views — shared chrome ── */
+    .view-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+      flex-shrink: 0;
+    }
 
-      main {
-        flex-direction: column;
-        height: auto;
-        min-height: 100vh;
-        overflow: visible;
-      }
+    .section-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover { color: var(--text-primary); }
+
+    /* Scrollable content inside section views */
+    .view-content {
+      flex: 1;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .view-content::-webkit-scrollbar { display: none; }
+
+    /* ── WORK — project cards ── */
+    .project {
+      padding: 1.1rem 0;
+      border-bottom: 0.5px solid var(--rule-color);
+    }
+
+    .project:first-child { border-top: 0.5px solid var(--rule-color); }
+
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    .project-date {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-event {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 0.65rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 0.5px solid var(--rule-color);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    /* ── ABOUT ── */
+    .about-section { margin-bottom: 1.4rem; }
+
+    .about-section-title {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 0.5px solid var(--rule-color);
+    }
+
+    .about-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin-bottom: 0.15rem;
+    }
+
+    .about-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .about-gpa {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .skill-row-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .skill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      border-bottom: 0.5px solid var(--rule-color);
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .contact-item:first-child { border-top: 0.5px solid var(--rule-color); }
+    .contact-item:hover { color: var(--text-primary); }
+
+    .contact-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-arrow {
+      display: inline-block;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .contact-item:hover .contact-arrow { transform: translateX(4px); }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 700px) {
+      html, body { overflow: auto; height: auto; }
+
+      main { flex-direction: column; height: auto; min-height: 100vh; }
 
       .panel-left {
         width: 100%;
-        padding: 2.5rem 2rem 2rem;
         border-right: none;
         border-bottom: 0.5px solid var(--rule-color);
         min-height: auto;
+        padding-bottom: 2rem;
       }
 
-      /* On mobile, bottom quote section is no longer position:absolute */
       .panel-left-bottom {
         position: static;
         margin-top: 2rem;
@@ -312,103 +454,334 @@
         border-top: 0.5px solid var(--rule-color);
       }
 
-      .avatar {
-        width: 90px;
-        height: 90px;
-      }
+      .avatar { width: 90px; height: 90px; }
 
-      .panel-right {
-        padding: 2rem;
-        gap: 2.5rem;
-      }
+      .panel-right { position: relative; flex: none; min-height: 60vh; }
 
-      .name {
-        font-size: 2.25rem; /* ~36px */
-      }
+      .view { position: relative; inset: auto; min-height: 60vh; }
+
+      .name { font-size: 2.25rem; }
     }
   </style>
 </head>
 
 <body>
-  <main>
+<main>
 
-    <!-- ══════════════════════════════════════
-         LEFT PANEL — avatar, quote, location
-    ══════════════════════════════════════ -->
-    <aside class="panel-left" aria-label="Profile sidebar">
+  <!-- ════════════════════════
+       LEFT PANEL
+  ════════════════════════ -->
+  <aside class="panel-left" aria-label="Profile">
 
-      <!-- Avatar -->
-      <div class="avatar" aria-label="Taehyeon Kim photo">
-        <img class="avatar-photo" src="IMG_1987.jpeg" alt="Taehyeon Kim" />
-      </div>
+    <div class="avatar">
+      <img src="IMG_1987.jpeg" alt="Taehyeon Kim" />
+    </div>
 
-      <!-- Availability badge -->
-      <div class="availability">
-        <span class="availability-dot" aria-hidden="true"></span>
-        Open to opportunities · 2026
-      </div>
+    <div class="availability">
+      <span class="availability-dot" aria-hidden="true"></span>
+      Open to opportunities · 2026
+    </div>
 
-      <!-- Quote + location pinned to bottom -->
-      <div class="panel-left-bottom">
-        <p class="tagline">
-          "I build systems with deliberate<br />attention to architectural tradeoffs,<br />not just working code."
-        </p>
-        <div class="left-rule" aria-hidden="true"></div>
-        <p class="location">Mississauga, Ontario</p>
-      </div>
+    <div class="panel-left-bottom">
+      <p class="tagline">"I grow blueberries and build software"</p>
+      <div class="left-rule" aria-hidden="true"></div>
+      <p class="location">Mississauga, Ontario</p>
+    </div>
 
-    </aside>
+  </aside>
 
 
-    <!-- ══════════════════════════════════════
-         RIGHT PANEL — name, bio, navigation
-    ══════════════════════════════════════ -->
-    <section class="panel-right" aria-label="Main content">
+  <!-- ════════════════════════
+       RIGHT PANEL
+  ════════════════════════ -->
+  <section class="panel-right" id="panel-right" aria-label="Main content">
 
-      <!-- Top: role tag, name, bio -->
-      <header class="panel-top">
+    <!-- ── HOME ── -->
+    <div class="view active" id="view-home">
+      <header>
         <p class="role-tag">Software Engineer &amp; CS Student</p>
-
-        <h1 class="name">
-          Taehyeon<br />Kim
-        </h1>
-
+        <h1 class="name">Taehyeon<br />Kim</h1>
         <div class="name-rule" aria-hidden="true"></div>
-
         <p class="bio">
-          Second-year Computer Science specialist at the University of Toronto Mississauga.
-          Builds full-stack systems and ML pipelines from design to deployment — with deliberate
-          attention to architectural tradeoffs.
+          Second-year CS specialist at the University of Toronto Mississauga.
+          Builds full-stack systems and ML pipelines from design to deployment —
+          with deliberate attention to architectural tradeoffs.
         </p>
       </header>
 
-      <!-- Bottom: navigation -->
       <nav aria-label="Site navigation">
-        <!-- Replace href="#" with your real URLs when ready -->
-        <a href="#work">
-          Work
-          <span class="arrow" aria-hidden="true">→</span>
+        <a href="#" data-target="work">
+          Work &amp; Projects <span class="arrow">→</span>
         </a>
-        <a href="#about">
-          About
-          <span class="arrow" aria-hidden="true">→</span>
+        <a href="#" data-target="about">
+          About <span class="arrow">→</span>
+        </a>
+        <a href="#" data-target="contact">
+          Contact <span class="arrow">→</span>
         </a>
         <a href="https://github.com/Tedd618" target="_blank" rel="noopener noreferrer">
-          GitHub
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="mailto:taehyeonkim618@gmail.com">
-          Contact
-          <span class="arrow" aria-hidden="true">→</span>
+          GitHub <span class="arrow">→</span>
         </a>
         <a href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener noreferrer">
-          Resume
-          <span class="arrow" aria-hidden="true">→</span>
+          Resume <span class="arrow">→</span>
         </a>
       </nav>
+    </div>
 
-    </section>
 
-  </main>
+    <!-- ── WORK & PROJECTS ── -->
+    <div class="view" id="view-work">
+      <div class="view-header">
+        <span class="section-label">Work &amp; Projects</span>
+        <button class="back-btn" data-back>← Back</button>
+      </div>
+
+      <div class="view-content">
+
+        <article class="project">
+          <div class="project-header">
+            <span class="project-name">Yosemite</span>
+            <span class="project-date">Mar 2026</span>
+          </div>
+          <p class="project-event">AI Compliance &amp; Fraud Detection · GenAI Genesis 2026 · Team of 4</p>
+          <p class="project-desc">
+            Hybrid fraud scoring pipeline combining rule-based heuristics, Benford's Law anomaly
+            detection, and multi-agent AI — reserving LLM inference only for ambiguous score ranges
+            to minimize latency and cost. Chose Rust (Axum/Tokio) over Node.js for sub-1s end-to-end
+            latency under concurrent workloads. Real-time sanctions screening against 1M+ entities
+            via OpenSanctions API with geopolitical risk scoring.
+          </p>
+          <div class="tags">
+            <span class="tag">Rust</span>
+            <span class="tag">Axum / Tokio</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Gemini 2.5</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">BiLSTM</span>
+            <span class="tag">Isolation Forest</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-header">
+            <span class="project-name">Tango</span>
+            <span class="project-date">Feb 2026</span>
+          </div>
+          <p class="project-event">Reinvented Job Matching Platform · DeerHacks V 2026 · Team of 3</p>
+          <p class="project-desc">
+            Mutual-match model (Hinge-style) replacing keyword-based resume screening — shifting
+            evaluation from credentials to personality-driven profiles. Bidirectional matching logic
+            with explicit race-condition handling for consistent state under concurrent interactions.
+            Transactional integrity via PostgreSQL + SQLAlchemy/Alembic.
+          </p>
+          <div class="tags">
+            <span class="tag">Next.js 15</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SQLAlchemy</span>
+            <span class="tag">Auth0</span>
+            <span class="tag">Tailwind CSS v4</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-header">
+            <span class="project-name">Tamdal</span>
+            <span class="project-date">2024 – Present</span>
+          </div>
+          <p class="project-event">Math Study Application · Long-term · Team of 3</p>
+          <p class="project-desc">
+            Math study app focused on written responses; leading technical development across 1+ year.
+            Designed Data Forge — an AI PDF organizer that parses and structures multi-page math
+            problem sets, prioritizing layout-aware extraction over naive text scraping for accuracy
+            on complex notation.
+          </p>
+          <div class="tags">
+            <span class="tag">Full-stack</span>
+            <span class="tag">AI / PDF parsing</span>
+            <span class="tag">LLM integration</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-header">
+            <span class="project-name">Paint Clone</span>
+            <span class="project-date">1 month</span>
+          </div>
+          <p class="project-event">Java GUI Application · Team of 4</p>
+          <p class="project-desc">
+            Led a team of 4 to build a Windows Paint clone with extended features in Java,
+            applying MVC design patterns and Scrum methodology. Managed sprint planning,
+            role assignment, and team motivation throughout the project lifecycle.
+          </p>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">MVC</span>
+            <span class="tag">Scrum</span>
+            <span class="tag">GUI</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+
+    <!-- ── ABOUT ── -->
+    <div class="view" id="view-about">
+      <div class="view-header">
+        <span class="section-label">About</span>
+        <button class="back-btn" data-back>← Back</button>
+      </div>
+
+      <div class="view-content">
+
+        <div class="about-section">
+          <p class="about-section-title">Education</p>
+          <p class="about-name">University of Toronto Mississauga</p>
+          <p class="about-sub">B.Sc. Computer Science Specialist<br />Statistics &amp; Mathematics Minor · 2024 – Present</p>
+          <p class="about-gpa">GPA 3.81 / 4.00</p>
+        </div>
+
+        <div class="about-section">
+          <p class="about-section-title">Technical Skills</p>
+
+          <p class="skill-row-label">Languages</p>
+          <div class="skill-row">
+            <span class="tag">Python</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Rust</span>
+            <span class="tag">Java</span>
+            <span class="tag">C</span>
+            <span class="tag">Bash</span>
+            <span class="tag">SQL</span>
+          </div>
+
+          <p class="skill-row-label">Frameworks &amp; Tools</p>
+          <div class="skill-row">
+            <span class="tag">FastAPI</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Axum / Tokio</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SQLAlchemy</span>
+            <span class="tag">Auth0</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Git</span>
+            <span class="tag">Linux</span>
+          </div>
+
+          <p class="skill-row-label">AI / ML</p>
+          <div class="skill-row">
+            <span class="tag">scikit-learn</span>
+            <span class="tag">Gemini API</span>
+            <span class="tag">LLM integration</span>
+            <span class="tag">Isolation Forest</span>
+            <span class="tag">Benford's Law</span>
+            <span class="tag">BiLSTM</span>
+          </div>
+
+          <p class="skill-row-label">Concepts</p>
+          <div class="skill-row">
+            <span class="tag">System Design</span>
+            <span class="tag">OOP</span>
+            <span class="tag">Design Patterns</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">DSA</span>
+            <span class="tag">Scrum / Agile</span>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <p class="about-section-title">Experience</p>
+          <p class="about-name" style="font-size:1rem;">Math, Physics &amp; Chemistry Tutor</p>
+          <p class="about-sub">Self-employed · September 2024 – Present<br />Personalized academic support for high school students.</p>
+        </div>
+
+        <div class="about-section">
+          <p class="about-section-title">Languages</p>
+          <p class="about-sub">Fluent in English and Korean</p>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ── CONTACT ── -->
+    <div class="view" id="view-contact">
+      <div class="view-header">
+        <span class="section-label">Contact</span>
+        <button class="back-btn" data-back>← Back</button>
+      </div>
+
+      <div class="view-content">
+
+        <a class="contact-item" href="mailto:taehyeonkim618@gmail.com">
+          <div>
+            <p class="contact-label">Email</p>
+            <p>taehyeonkim618@gmail.com</p>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+
+        <a class="contact-item" href="https://github.com/Tedd618" target="_blank" rel="noopener noreferrer">
+          <div>
+            <p class="contact-label">GitHub</p>
+            <p>@Tedd618</p>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+
+        <a class="contact-item" href="https://linkedin.com/in/taehyeon-kim" target="_blank" rel="noopener noreferrer">
+          <div>
+            <p class="contact-label">LinkedIn</p>
+            <p>linkedin.com/in/taehyeon-kim</p>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+
+        <a class="contact-item" href="https://devpost.com/Tedd618" target="_blank" rel="noopener noreferrer">
+          <div>
+            <p class="contact-label">Devpost</p>
+            <p>@Tedd618</p>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+
+        <a class="contact-item" href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener noreferrer">
+          <div>
+            <p class="contact-label">Resume</p>
+            <p>Download PDF</p>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  // Switch to a named view
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + id).classList.add('active');
+  }
+
+  // Nav links with data-target switch views in-place
+  document.querySelectorAll('[data-target]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showView(link.dataset.target);
+    });
+  });
+
+  // Back buttons return home
+  document.querySelectorAll('[data-back]').forEach(btn => {
+    btn.addEventListener('click', () => showView('home'));
+  });
+</script>
+
 </body>
 </html>
