@@ -1,150 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal portfolio of Tedd618 - Developer & Creative">
-    <title>Tedd618 | Personal Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taehyeon Kim</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Cormorant Garamond + Jost -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── Design tokens ─────────────────────────────────────────── */
+    :root {
+      --bg-left:        #EAE5DC;
+      --bg-left-deep:   #D8D0C4;
+      --bg-right:       #F7F5F0;
+      --text-primary:   #2A2620;
+      --text-secondary: #6A6155;
+      --text-muted:     #9B9181;
+      --text-faint:     #C8C2B4;
+      --accent-italic:  #B0A490;
+      --rule-color:     #E4DFD6;
+      --avatar-bg:      #C4BAA8;
+      --avatar-border:  #B8B0A0;
+      --avatar-text:    #7A705E;
+      --available:      #8A9B8A;
+    }
 
-    <!-- Favicon -->
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    /* ─── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      color: var(--text-primary);
+      background: var(--bg-right);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ─── Two-column layout ──────────────────────────────────────── */
+    main {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ─── LEFT PANEL ─────────────────────────────────────────────── */
+    .panel-left {
+      width: 45%;
+      flex-shrink: 0;
+      background: linear-gradient(180deg, var(--bg-left) 0%, var(--bg-left-deep) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem;
+      border-right: 0.5px solid var(--rule-color);
+      position: relative;
+
+      /* Entry animation */
+      animation: slideInLeft 0.6s ease-out both;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-12px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Avatar */
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--avatar-bg);
+      border: 0.5px solid var(--avatar-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .avatar-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--avatar-text);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    .avatar img.avatar-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      /* Crops to Taehyeon's face in the foreground of the group photo */
+      object-position: 88% 92%;
+      transform: scale(2.6);
+      transform-origin: 88% 92%;
+    }
+
+    /* Availability badge — sits just below avatar */
+    .availability {
+      margin-top: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .availability-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--available);
+      flex-shrink: 0;
+    }
+
+    /* Bottom area: quote + location pinned to bottom */
+    .panel-left-bottom {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      right: 2.5rem;
+      text-align: center;
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
+
+    .location {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Hairline divider above location */
+    .left-rule {
+      width: 24px;
+      height: 0.5px;
+      background: var(--text-faint);
+      margin: 0 auto 0.9rem;
+    }
+
+    /* ─── RIGHT PANEL ────────────────────────────────────────────── */
+    .panel-right {
+      flex: 1;
+      background: var(--bg-right);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem;
+
+      /* Entry animation */
+      animation: fadeIn 0.5s ease-out 0.2s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Top section ── */
+    .panel-top {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .role-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 3rem;        /* ~48px */
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Thin rule between name and bio */
+    .name-rule {
+      width: 30px;
+      height: 0.5px;
+      background: var(--text-faint);
+      margin-bottom: 1.1rem;
+    }
+
+    .bio {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 34ch;
+    }
+
+    /* ── Bottom: navigation ── */
+    nav {
+      border-top: 0.5px solid var(--rule-color);
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.75rem 0;
+      border-bottom: 0.5px solid var(--rule-color);
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Arrow shifts right on hover */
+    nav a .arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    nav a:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* Staggered nav entry animations */
+    nav a {
+      animation: navSlideUp 0.4s ease-out both;
+    }
+
+    nav a:nth-child(1) { animation-delay: 0.35s; }
+    nav a:nth-child(2) { animation-delay: 0.45s; }
+    nav a:nth-child(3) { animation-delay: 0.55s; }
+    nav a:nth-child(4) { animation-delay: 0.65s; }
+    nav a:nth-child(5) { animation-delay: 0.75s; }
+
+    @keyframes navSlideUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Responsive — stack on narrow viewports ─────────────────── */
+    @media (max-width: 700px) {
+      body {
+        height: auto;
+        overflow: auto;
+      }
+
+      main {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+      }
+
+      .panel-left {
+        width: 100%;
+        padding: 2.5rem 2rem 2rem;
+        border-right: none;
+        border-bottom: 0.5px solid var(--rule-color);
+        min-height: auto;
+      }
+
+      /* On mobile, bottom quote section is no longer position:absolute */
+      .panel-left-bottom {
+        position: static;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 0.5px solid var(--rule-color);
+      }
+
+      .avatar {
+        width: 90px;
+        height: 90px;
+      }
+
+      .panel-right {
+        padding: 2rem;
+        gap: 2.5rem;
+      }
+
+      .name {
+        font-size: 2.25rem; /* ~36px */
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="cursor-glow"></div>
+  <main>
 
-    <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">Tedd618</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="TaehyeonKim_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- ══════════════════════════════════════
+         LEFT PANEL — avatar, quote, location
+    ══════════════════════════════════════ -->
+    <aside class="panel-left" aria-label="Profile sidebar">
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="container hero-content">
-                <span class="eyebrow fade-in-up">Welcome to my space</span>
-                <h1 class="fade-in-up delay-1">Fully AI generated<br><span class="gradient-text">Personal Website</span>
-                </h1>
-                <p class="fade-in-up delay-2">It looks cool, eh?</p>
-                <div class="hero-btns fade-in-up delay-3">
-                    <a href="#projects" class="btn btn-primary">View Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-                </div>
-            </div>
-            <div class="scroll-down">
-                <span>Scroll</span>
-                <div class="arrow">↓</div>
-            </div>
-        </section>
+      <!-- Avatar -->
+      <div class="avatar" aria-label="Taehyeon Kim photo">
+        <img class="avatar-photo" src="IMG_1987.jpeg" alt="Taehyeon Kim" />
+      </div>
 
-        <!-- About Section -->
-        <section class="section" id="about">
-            <div class="container">
-                <h2 class="section-title reveal">About Me</h2>
-                <div class="about-grid">
-                    <div class="about-text reveal">
-                        <p>Hello! I'm <strong>Taehyeon Kim</strong>, a Computer Science major at the University of
-                            Toronto Mississauga (GPA 3.8/4.0). I am specializing in Software Development and Machine
-                            Learning, with a strong foundation in algorithms and statistical modeling.</p>
-                        <p>I have a passion for <strong>automating workflows</strong> and building efficient systems.
-                            Whether it's leading a team or solving complex algorithmic problems, I focus on creating
-                            clean, robust solutions.</p>
-                        <p>Fluent in English and Korean, I value clear communication and collaborative growth.</p>
+      <!-- Availability badge -->
+      <div class="availability">
+        <span class="availability-dot" aria-hidden="true"></span>
+        Open to opportunities · 2026
+      </div>
 
-                        <div class="skills">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">Git & Linux</span>
-                            <span class="skill-tag">OOP & Design Patterns</span>
-                            <span class="skill-tag">Scrum Methodology</span>
-                        </div>
-                        
-                        <div style="margin-top: 2rem;">
-                            <a href="TaehyeonKim_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Resume</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Quote + location pinned to bottom -->
+      <div class="panel-left-bottom">
+        <p class="tagline">
+          "I build systems with deliberate<br />attention to architectural tradeoffs,<br />not just working code."
+        </p>
+        <div class="left-rule" aria-hidden="true"></div>
+        <p class="location">Mississauga, Ontario</p>
+      </div>
 
-        <!-- Projects Section -->
-        <section class="section" id="projects">
-            <div class="container">
-                <h2 class="section-title reveal">Selected Work</h2>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <article class="project-card reveal">
-                        <div class="project-content">
-                            <h3>Tamdal</h3>
-                            <p>A multimodal math studying application focused on written responses. (Ongoing)</p>
-                            <div class="project-tags">
-                                <span>Software Dev</span>
-                                <span>EdTech</span>
-                                <span>Team Project</span>
-                            </div>
-                            <a href="#" class="project-link">View Project →</a>
-                        </div>
-                    </article>
+    </aside>
 
-                    <!-- Project 2 -->
-                    <article class="project-card reveal">
-                        <div class="project-content">
-                            <h3>Java Paint</h3>
-                            <p>A full-featured paint program mimicking MS Paint. Led a team of 4 using Agile methodology
-                                and Design Patterns.</p>
-                            <div class="project-tags">
-                                <span>Java</span>
-                                <span>OOP</span>
-                                <span>Design Patterns</span>
-                            </div>
-                            <a href="#" class="project-link">View Project →</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section class="section" id="contact">
-            <div class="container contact-container">
-                <h2 class="section-title reveal">Let's Connect</h2>
-                <p class="contact-text reveal">Have a project in mind or just want to say hi? Feel free to reach out.
-                </p>
-                <a href="mailto:taehyeonkim618@gmail.com" class="btn btn-primary reveal">Say Hello</a>
+    <!-- ══════════════════════════════════════
+         RIGHT PANEL — name, bio, navigation
+    ══════════════════════════════════════ -->
+    <section class="panel-right" aria-label="Main content">
 
-                <div class="social-links reveal">
-                    <a href="https://github.com/Tedd618" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
-                    <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-            </div>
-        </section>
-    </main>
+      <!-- Top: role tag, name, bio -->
+      <header class="panel-top">
+        <p class="role-tag">Software Engineer &amp; CS Student</p>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Tedd618. Built with simplicity.</p>
-        </div>
-    </footer>
+        <h1 class="name">
+          Taehyeon<br />Kim
+        </h1>
 
-    <script src="script.js"></script>
+        <div class="name-rule" aria-hidden="true"></div>
+
+        <p class="bio">
+          Second-year Computer Science specialist at the University of Toronto Mississauga.
+          Builds full-stack systems and ML pipelines from design to deployment — with deliberate
+          attention to architectural tradeoffs.
+        </p>
+      </header>
+
+      <!-- Bottom: navigation -->
+      <nav aria-label="Site navigation">
+        <!-- Replace href="#" with your real URLs when ready -->
+        <a href="#work">
+          Work
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="#about">
+          About
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="https://github.com/Tedd618" target="_blank" rel="noopener noreferrer">
+          GitHub
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="mailto:taehyeonkim618@gmail.com">
+          Contact
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener noreferrer">
+          Resume
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </nav>
+
+    </section>
+
+  </main>
 </body>
-
 </html>
