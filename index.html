@@ -149,7 +149,6 @@
     }
 
     /* ─── View system ────────────────────────────────────── */
-    /* Each view sits absolutely inside panel-right and fades in/out */
     .view {
       position: absolute;
       inset: 0;
@@ -334,6 +333,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.35rem;
+      margin-bottom: 0.65rem;
     }
 
     .tag {
@@ -345,6 +345,34 @@
       border: 0.5px solid var(--rule-color);
       padding: 0.2rem 0.5rem;
       border-radius: 2px;
+    }
+
+    /* Project external links */
+    .project-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .project-link {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover { color: var(--text-primary); }
+
+    .project-link-story {
+      color: var(--text-secondary);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
     }
 
     /* ── ABOUT ── */
@@ -497,7 +525,7 @@
   <section class="panel-right" id="panel-right" aria-label="Main content">
 
     <!-- ── HOME ── -->
-    <div class="view active" id="view-home">
+    <div class="view" id="view-home">
       <header>
         <p class="role-tag">Software Engineer &amp; CS Student</p>
         <h1 class="name">Taehyeon<br />Kim</h1>
@@ -510,13 +538,13 @@
       </header>
 
       <nav aria-label="Site navigation">
-        <a href="#" data-target="work">
+        <a href="#work" data-target="work">
           Work &amp; Projects <span class="arrow">→</span>
         </a>
-        <a href="#" data-target="about">
+        <a href="#about" data-target="about">
           About <span class="arrow">→</span>
         </a>
-        <a href="#" data-target="contact">
+        <a href="#contact" data-target="contact">
           Contact <span class="arrow">→</span>
         </a>
         <a href="https://github.com/Tedd618" target="_blank" rel="noopener noreferrer">
@@ -562,6 +590,14 @@
             <span class="tag">BiLSTM</span>
             <span class="tag">Isolation Forest</span>
           </div>
+          <div class="project-links">
+            <!-- TODO: replace # with actual devpost URL -->
+            <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">Devpost →</a>
+            <!-- TODO: replace # with actual github URL -->
+            <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <!-- TODO: replace # with story page URL -->
+            <a class="project-link project-link-story" href="#">The story →</a>
+          </div>
         </article>
 
         <article class="project">
@@ -584,6 +620,14 @@
             <span class="tag">Auth0</span>
             <span class="tag">Tailwind CSS v4</span>
           </div>
+          <div class="project-links">
+            <!-- TODO: replace # with actual devpost URL -->
+            <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">Devpost →</a>
+            <!-- TODO: replace # with actual github URL -->
+            <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <!-- TODO: replace # with story page URL -->
+            <a class="project-link project-link-story" href="#">The story →</a>
+          </div>
         </article>
 
         <article class="project">
@@ -603,6 +647,12 @@
             <span class="tag">AI / PDF parsing</span>
             <span class="tag">LLM integration</span>
           </div>
+          <div class="project-links">
+            <!-- TODO: replace # with actual github URL -->
+            <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <!-- TODO: replace # with story page URL -->
+            <a class="project-link project-link-story" href="#">The story →</a>
+          </div>
         </article>
 
         <article class="project">
@@ -621,6 +671,12 @@
             <span class="tag">MVC</span>
             <span class="tag">Scrum</span>
             <span class="tag">GUI</span>
+          </div>
+          <div class="project-links">
+            <!-- TODO: replace # with actual github URL -->
+            <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <!-- TODO: replace # with story page URL -->
+            <a class="project-link project-link-story" href="#">The story →</a>
           </div>
         </article>
 
@@ -763,24 +819,43 @@
 </main>
 
 <script>
-  // Switch to a named view
-  function showView(id) {
+  const VIEWS = ['home', 'work', 'about', 'contact'];
+
+  function showView(id, pushState) {
+    if (!VIEWS.includes(id)) id = 'home';
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
+    if (pushState) {
+      const hash = id === 'home' ? '' : '#' + id;
+      history.pushState({ view: id }, '', location.pathname + hash);
+    }
   }
 
-  // Nav links with data-target switch views in-place
+  // Nav links with data-target
   document.querySelectorAll('[data-target]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      showView(link.dataset.target);
+      showView(link.dataset.target, true);
     });
   });
 
-  // Back buttons return home
+  // Back buttons
   document.querySelectorAll('[data-back]').forEach(btn => {
-    btn.addEventListener('click', () => showView('home'));
+    btn.addEventListener('click', () => {
+      history.back();
+    });
   });
+
+  // Browser back/forward
+  window.addEventListener('popstate', e => {
+    const id = e.state?.view ?? location.hash.slice(1) ?? 'home';
+    showView(id, false);
+  });
+
+  // Initial load — read hash or default to home
+  const initial = location.hash.slice(1) || 'home';
+  history.replaceState({ view: initial }, '', location.href);
+  showView(initial, false);
 </script>
 
 </body>
