@@ -12,8 +12,8 @@
   <style>
     /* ─── Tokens ─────────────────────────────────────────── */
     :root {
-      --bg:            #EFEDE6;
-      --bg-band:       #DAD7CF;
+      --bg:            #F4F5F1;
+      --bg-band:       #E0E1DD;
       --text:          #4A4A48;
       --text-soft:     #6A6864;
       --text-muted:    #9B9890;
@@ -55,8 +55,8 @@
     /* ─── Logo ──────────────────────────────────────────── */
     .logo {
       display: block;
-      width: 88px;
-      height: 110px;
+      width: 120px;
+      height: 150px;
       margin: 0 auto 1.75rem;
     }
     .logo img {
@@ -121,8 +121,9 @@
     /* ─── Featured strip ────────────────────────────────── */
     .featured-strip {
       background: var(--bg-band);
-      margin: 2.75rem -1.5rem 2.25rem;
-      padding: 1.75rem 1.5rem;
+      margin: 2.75rem calc(50% - 50vw) 2.25rem;
+      padding: 1.75rem calc(50vw - 50%);
+      width: 100vw;
     }
 
     .featured-strip-inner {
@@ -436,6 +437,35 @@
     }
 
     .blog-body p { margin-bottom: 1.25rem; }
+
+    .blog-title a { color: inherit; cursor: pointer; }
+    .blog-title a:hover { color: var(--text-soft); }
+
+    .read-more a {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+    .read-more a:hover { color: var(--text); }
+
+    .blog-back {
+      max-width: 620px;
+      margin: 0 auto 1.25rem;
+    }
+    .blog-back a {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .blog-back a:hover { color: var(--text); }
     .blog-body a.inline {
       border-bottom: 1px solid var(--text-muted);
       padding-bottom: 1px;
@@ -459,8 +489,10 @@
        RESUME
     ═══════════════════════════════════════════════════════ */
     .resume-wrap {
-      max-width: 760px;
-      margin: 0 auto;
+      max-width: 1100px;
+      margin: 0 calc(50% - 50vw);
+      padding: 0 2rem;
+      width: 100vw;
     }
 
     .resume-actions {
@@ -484,7 +516,7 @@
 
     .resume-frame {
       width: 100%;
-      height: 900px;
+      height: 1200px;
       border: 0.5px solid var(--rule);
       border-radius: 2px;
       background: var(--bg-band);
@@ -616,6 +648,32 @@
 
     <article class="blog-post">
       <header class="blog-header">
+        <h2 class="blog-title"><a data-target="post-prereq">Parsing 2,300 Course Prerequisites by Hand</a></h2>
+        <span class="blog-comments">soon</span>
+      </header>
+      <p class="blog-meta">Posted on <a>14th May 2026</a>&nbsp; |&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></p>
+
+      <div class="blog-body">
+        <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
+
+        <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5"&hellip;</p>
+
+        <p class="read-more"><a data-target="post-prereq">Read more →</a></p>
+      </div>
+    </article>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════
+       BLOG POST (full)
+  ════════════════════════════════════ -->
+  <section class="view" id="view-post-prereq">
+
+    <article class="blog-post">
+      <p class="blog-back"><a data-target="blog">← Back to Blog</a></p>
+
+      <header class="blog-header">
         <h2 class="blog-title">Parsing 2,300 Course Prerequisites by Hand</h2>
         <span class="blog-comments">soon</span>
       </header>
@@ -647,7 +705,7 @@
         <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener">Open in new tab →</a>
         <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" download>Download PDF →</a>
       </div>
-      <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#view=FitH" title="Taehyeon Kim — Resume"></iframe>
+      <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#view=FitH&navpanes=0&toolbar=1&zoom=page-width" title="Taehyeon Kim — Resume"></iframe>
     </div>
 
   </section>
@@ -661,14 +719,17 @@
 </div>
 
 <script>
-  const VIEWS = ['about', 'projects', 'blog', 'resume'];
+  const VIEWS = ['about', 'projects', 'blog', 'resume', 'post-prereq'];
+  // Which top-level nav tab to highlight for each view
+  const VIEW_NAV = { 'post-prereq': 'blog' };
 
   function showView(id, pushState) {
     if (!VIEWS.includes(id)) id = 'about';
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
+    const navId = VIEW_NAV[id] || id;
     document.querySelectorAll('nav.tabs a').forEach(a => {
-      a.classList.toggle('active', a.dataset.target === id);
+      a.classList.toggle('active', a.dataset.target === navId);
     });
     if (pushState) {
       const hash = id === 'about' ? '' : '#' + id;
