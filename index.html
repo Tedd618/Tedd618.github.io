@@ -4,200 +4,722 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Taehyeon Kim</title>
-  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────── */
+    :root {
+      --bg:            #F4F5F1;
+      --bg-band:       #E0E1DD;
+      --text:          #4A4A48;
+      --text-soft:     #6A6864;
+      --text-muted:    #9B9890;
+      --rule:          #D9D6CE;
+      --pill:          #D9D6CE;
+      --pill-active:   #CFCBC1;
+      --icon:          #B6B2A8;
+      --icon-hover:    #6A6864;
+      --accent-flickr: #E14B85;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Source Sans 3', 'PT Sans', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Page shell ─────────────────────────────────────── */
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 2rem;
+      animation: fadeIn 0.5s ease-out both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Logo ──────────────────────────────────────────── */
+    .logo {
+      display: block;
+      width: 120px;
+      height: 150px;
+      margin: 0 auto 1.75rem;
+    }
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ─── Nav (pill tabs) ───────────────────────────────── */
+    nav.tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 2.75rem;
+    }
+
+    nav.tabs a {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      padding: 0.5rem 1.1rem;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    nav.tabs a:hover { color: var(--text); }
+    nav.tabs a.active {
+      background: var(--pill-active);
+      color: var(--text);
+    }
+
+    /* ─── View system ───────────────────────────────────── */
+    .view { display: none; animation: fadeIn 0.35s ease-out both; }
+    .view.active { display: block; }
+
+    /* ─── About copy ────────────────────────────────────── */
+    .about-copy {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .about-copy p {
+      margin-bottom: 1.4rem;
+    }
+
+    .about-copy a.inline {
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .about-copy a.inline:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    /* ─── Featured strip ────────────────────────────────── */
+    .featured-strip {
+      background: var(--bg-band);
+      margin: 2.75rem calc(50% - 50vw) 2.25rem;
+      padding: 1.75rem calc(50vw - 50%);
+      width: 100vw;
+    }
+
+    .featured-strip-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .featured-tile {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #C9C2B0 0%, #B5AC97 100%);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      text-align: center;
+      transition: transform 0.25s ease;
+      cursor: pointer;
+    }
+    .featured-tile:hover { transform: translateY(-2px); }
+
+    .featured-tile span {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    /* Distinct tints per tile so the strip reads visually */
+    .tile-utm     { background: linear-gradient(135deg, #4A6B8A 0%, #2F4866 100%); }
+    .tile-yose    { background: linear-gradient(135deg, #6B8268 0%, #455C42 100%); }
+    .tile-tango   { background: linear-gradient(135deg, #B07A6B 0%, #8A554A 100%); }
+    .tile-tamdal  { background: linear-gradient(135deg, #8E7AA0 0%, #6A5680 100%); }
+
+    /* ─── Social icons ──────────────────────────────────── */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 0.55rem;
+      margin: 2rem 0 0.5rem;
+      position: relative;
+    }
+
+    .social {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--icon);
+      color: #F0EDE6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: lowercase;
+      transition: background 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .social:hover { background: var(--icon-hover); transform: translateY(-1px); }
+    .social[data-tip]:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      top: calc(100% + 14px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--icon);
+      color: #F0EDE6;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 1.2rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .social[data-tip]:hover::before {
+      content: "";
+      position: absolute;
+      top: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      background: var(--icon);
+    }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer.site-footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PROJECTS — image grid
+    ═══════════════════════════════════════════════════════ */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      aspect-ratio: 4 / 3;
+      background: var(--bg-band);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      color: #fff;
+    }
+    .project-card:hover { transform: translateY(-3px); }
+
+    .project-card.utm   { background: linear-gradient(135deg, #5B7FA3 0%, #2F4866 100%); }
+    .project-card.yose  { background: linear-gradient(135deg, #7E9A78 0%, #455C42 100%); }
+    .project-card.tango { background: linear-gradient(135deg, #C58D7A 0%, #8A554A 100%); }
+    .project-card.tamdal{ background: linear-gradient(135deg, #A491BB 0%, #6A5680 100%); }
+    .project-card.paint { background: linear-gradient(135deg, #B5AE9A 0%, #807A66 100%); }
+
+    .project-card .pc-name {
+      font-family: 'Source Sans 3', 'PT Sans', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin-bottom: 0.15rem;
+    }
+    .project-card .pc-meta {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .project-detail {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--rule);
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .project-detail h2 {
+      font-family: 'Source Sans 3', 'PT Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .project-detail .pd-meta {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .project-detail p { margin-bottom: 1rem; }
+    .project-detail .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .project-detail .tag {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border: 0.5px solid var(--rule);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .project-detail .links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+    .project-detail .links a {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+      transition: color 0.2s;
+    }
+    .project-detail .links a:hover { color: var(--text); }
+
+    /* ═══════════════════════════════════════════════════════
+       GALLERY — thumbnail strip + preview
+    ═══════════════════════════════════════════════════════ */
+    .gallery-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .gallery-thumb {
+      aspect-ratio: 1 / 1;
+      background: var(--bg-band);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      opacity: 0.55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+      padding: 0.25rem;
+      line-height: 1.2;
+    }
+    .gallery-thumb:hover { opacity: 0.85; }
+    .gallery-thumb.active { opacity: 1; transform: scale(1.02); }
+
+    .gallery-thumb.g1 { background: linear-gradient(135deg, #5B7FA3, #2F4866); }
+    .gallery-thumb.g2 { background: linear-gradient(135deg, #7E9A78, #455C42); }
+    .gallery-thumb.g3 { background: linear-gradient(135deg, #C58D7A, #8A554A); }
+    .gallery-thumb.g4 { background: linear-gradient(135deg, #A491BB, #6A5680); }
+    .gallery-thumb.g5 { background: linear-gradient(135deg, #B5AE9A, #807A66); }
+    .gallery-thumb.g6 { background: linear-gradient(135deg, #6A8AA8, #3D5673); }
+
+    .gallery-preview {
+      aspect-ratio: 4 / 5;
+      background: var(--bg-band);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: #fff;
+      font-family: 'Source Sans 3', 'PT Sans', sans-serif;
+      font-size: 1.4rem;
+      text-align: center;
+      line-height: 1.3;
+      transition: background 0.4s ease;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       BLOG
+    ═══════════════════════════════════════════════════════ */
+    .blog-post { max-width: 620px; margin: 0 auto; }
+
+    .blog-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .blog-title {
+      font-family: 'Source Sans 3', 'PT Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1.6rem;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .blog-comments {
+      flex-shrink: 0;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+      background: var(--pill);
+      padding: 0.25rem 0.7rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .blog-meta {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+    }
+    .blog-meta a {
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+    }
+
+    .blog-body p { margin-bottom: 1.25rem; }
+
+    .blog-title a { color: inherit; cursor: pointer; }
+    .blog-title a:hover { color: var(--text-soft); }
+
+    .read-more a {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+    .read-more a:hover { color: var(--text); }
+
+    .blog-back {
+      max-width: 620px;
+      margin: 0 auto 1.25rem;
+    }
+    .blog-back a {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .blog-back a:hover { color: var(--text); }
+    .blog-body a.inline {
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+    }
+
+    .blog-figure {
+      margin: 1.75rem 0;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #7E9A78 0%, #455C42 100%);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Source Sans 3', 'PT Sans', sans-serif;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESUME
+    ═══════════════════════════════════════════════════════ */
+    .resume-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .resume-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .resume-link {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .resume-link:hover { color: var(--text); border-color: var(--text); }
+
+    .resume-frame {
+      width: 100%;
+      height: 1200px;
+      border: 0.5px solid var(--rule);
+      border-radius: 2px;
+      background: var(--bg-band);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       Responsive
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .page { padding: 2.25rem 1.25rem; }
+      nav.tabs a { padding: 0.45rem 0.75rem; font-size: 11px; }
+      .featured-strip-inner { grid-template-columns: repeat(2, 1fr); }
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .resume-frame { height: 600px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ════════════════════════════════════
-     HEADER — logo + nav
-══════════════════════════════════════ -->
-<header>
+<div class="page">
+
+  <!-- Logo / avatar -->
   <a href="#about" data-target="about" class="logo" aria-label="Home">
     <img src="logo.png" alt="Taehyeon Kim" />
   </a>
 
-  <nav aria-label="Main navigation">
-    <ul>
-      <li><a data-target="about">About&nbsp;Me</a></li>
-      <li><a data-target="projects">Projects</a></li>
-      <li><a data-target="blog">Blog</a></li>
-      <li><a data-target="resume">Resume</a></li>
-    </ul>
+  <!-- Nav -->
+  <nav class="tabs" aria-label="Main navigation">
+    <a data-target="about">About&nbsp;Me</a>
+    <a data-target="projects">Projects</a>
+    <a data-target="blog">Blog</a>
+    <a data-target="resume">Resume</a>
   </nav>
-</header>
 
 
-<!-- ════════════════════════════════════
-     ABOUT
-══════════════════════════════════════ -->
-<div class="view" id="view-about">
+  <!-- ════════════════════════════════════
+       ABOUT
+  ════════════════════════════════════ -->
+  <section class="view" id="view-about">
 
-  <section class="intro">
-    <p>Hi, my name is Taehyeon &ndash; I'm a software engineer and second-year Computer Science specialist at the <a href="https://www.utoronto.ca/" target="_blank" rel="noopener">University of Toronto Mississauga</a>.</p>
+    <div class="about-copy">
+      <p>Hi, my name is Taehyeon &mdash; I'm a software engineer and second-year Computer Science specialist at the <a class="inline" href="https://www.utoronto.ca/" target="_blank" rel="noopener">University of Toronto Mississauga</a>.</p>
 
-    <p>I'm best known for <a data-target="projects">UTM Degree Explorer</a> &ndash; a local-first degree planner built on a fully scraped copy of the UTM Academic Calendar (2,346 courses, 164 programs) &ndash; and for <a href="https://devpost.com/software/arrt" target="_blank" rel="noopener">Yosemite</a>, a compliance intelligence platform built at GenAI Genesis 2026.</p>
+      <p>I build full-stack systems and ML pipelines from design to deployment, most recently a local-first degree planner for UTM students called <a class="inline" data-target="projects">UTM Degree Explorer</a>, and a compliance intelligence platform called <a class="inline" href="https://devpost.com/software/arrt" target="_blank" rel="noopener">Yosemite</a>.</p>
 
-    <p>I care about architectural tradeoffs, clean data, and software that feels fast.</p>
+      <p>I care about architectural tradeoffs, clean data, and software that feels fast.</p>
 
-    <p>Get in touch at <a href="mailto:taehyeonkim618@gmail.com">taehyeonkim618@gmail.com</a>.</p>
+      <p>Get in touch at <a class="inline" href="mailto:taehyeonkim618@gmail.com">taehyeonkim618@gmail.com</a>.</p>
+    </div>
+
+    <!-- Featured strip -->
+    <div class="featured-strip">
+      <div class="featured-strip-inner">
+        <a class="featured-tile tile-utm"    data-target="projects"><span>UTM Degree<br/>Explorer</span></a>
+        <a class="featured-tile tile-yose"   data-target="projects"><span>Yosemite</span></a>
+        <a class="featured-tile tile-tango"  data-target="projects"><span>Tango</span></a>
+        <a class="featured-tile tile-tamdal" data-target="projects"><span>Tamdal</span></a>
+      </div>
+    </div>
+
+    <!-- Socials -->
+    <div class="socials">
+      <a class="social" data-tip="GitHub"   href="https://github.com/Tedd618" target="_blank" rel="noopener">gh</a>
+      <a class="social" data-tip="LinkedIn" href="https://linkedin.com/in/taehyeon-kim" target="_blank" rel="noopener">in</a>
+      <a class="social" data-tip="Devpost"  href="https://devpost.com/Tedd618" target="_blank" rel="noopener">dp</a>
+      <a class="social" data-tip="Email"    href="mailto:taehyeonkim618@gmail.com">@</a>
+      <a class="social" data-tip="Resume"   href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener">cv</a>
+    </div>
+
   </section>
 
-  <ul class="featured">
-    <li><a class="tile-utm"    data-target="projects"><i><b>UTM Degree Explorer</b></i></a></li>
-    <li><a class="tile-yose"   data-target="projects"><i><b>Yosemite</b></i></a></li>
-    <li><a class="tile-tango"  data-target="projects"><i><b>Tango</b></i></a></li>
-    <li><a class="tile-tamdal" data-target="projects"><i><b>Tamdal</b></i></a></li>
-  </ul>
 
-  <div class="social">
-    <ul class="links">
-      <li><a class="github"   data-tip="GitHub"   href="https://github.com/Tedd618" target="_blank" rel="noopener">gh</a></li>
-      <li><a class="linkedin" data-tip="LinkedIn" href="https://linkedin.com/in/taehyeon-kim" target="_blank" rel="noopener">in</a></li>
-      <li><a class="devpost"  data-tip="Devpost"  href="https://devpost.com/Tedd618" target="_blank" rel="noopener">dp</a></li>
-      <li><a class="email"    data-tip="Email"    href="mailto:taehyeonkim618@gmail.com">@</a></li>
-      <li><a class="resume"   data-tip="Resume"   data-target="resume">cv</a></li>
-    </ul>
-    <div class="arrow"><span></span></div>
-  </div>
+  <!-- ════════════════════════════════════
+       PROJECTS
+  ════════════════════════════════════ -->
+  <section class="view" id="view-projects">
 
-</div>
-
-
-<!-- ════════════════════════════════════
-     PROJECTS
-══════════════════════════════════════ -->
-<div class="view" id="view-projects">
-
-  <ul class="design-thumbnails">
-    <li>
-      <a class="utm first" data-project="utm">
-        <i><b>UTM Degree Explorer<small>Local-first Degree Planner</small></b></i>
-        <span class="label">UTM Degree Explorer<small>May 2026</small></span>
+    <div class="project-grid">
+      <a class="project-card utm"    data-project="utm">
+        <span class="pc-name">UTM Degree Explorer</span>
+        <span class="pc-meta">May 2026</span>
       </a>
-    </li>
-    <li>
-      <a class="yose" data-project="yose">
-        <i><b>Yosemite<small>Compliance Intelligence</small></b></i>
-        <span class="label">Yosemite<small>GenAI Genesis · Mar 2026</small></span>
+      <a class="project-card yose"   data-project="yose">
+        <span class="pc-name">Yosemite</span>
+        <span class="pc-meta">Mar 2026 · GenAI Genesis</span>
       </a>
-    </li>
-    <li>
-      <a class="tango" data-project="tango">
-        <i><b>Tango<small>Mutual-Match Hiring</small></b></i>
-        <span class="label">Tango<small>DeerHacks V · Feb 2026</small></span>
+      <a class="project-card tango"  data-project="tango">
+        <span class="pc-name">Tango</span>
+        <span class="pc-meta">Feb 2026 · DeerHacks V</span>
       </a>
-    </li>
-    <li>
-      <a class="tamdal" data-project="tamdal">
-        <i><b>Tamdal<small>AI Math Study Platform</small></b></i>
-        <span class="label">Tamdal<small>2024 – Present</small></span>
+      <a class="project-card tamdal" data-project="tamdal">
+        <span class="pc-name">Tamdal</span>
+        <span class="pc-meta">2024 – Present</span>
       </a>
-    </li>
-    <li>
-      <a class="paint" data-project="paint">
-        <i><b>Paint Clone<small>Java MVC · Team of 4</small></b></i>
-        <span class="label">Paint Clone<small>Java · 1 month</small></span>
+      <a class="project-card paint"  data-project="paint">
+        <span class="pc-name">Paint Clone</span>
+        <span class="pc-meta">Java · Team of 4</span>
       </a>
-    </li>
-  </ul>
-
-  <article class="project-detail" id="project-detail">
-    <h2>UTM Degree Explorer</h2>
-    <p class="pd-meta">May 2026 &middot; Solo &middot; Local-first Degree Planner</p>
-    <p>Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar &mdash; 2,346 courses and 164 programs scraped and parsed into structured ASTs (86% structured coverage, 14% graceful text fallback).</p>
-    <div class="tags">
-      <span class="tag">React</span>
-      <span class="tag">TypeScript</span>
-      <span class="tag">Vite</span>
-      <span class="tag">Zustand</span>
-      <span class="tag">Tailwind</span>
-      <span class="tag">Supabase</span>
-      <span class="tag">Python</span>
-      <span class="tag">BeautifulSoup</span>
     </div>
-    <div class="links">
-      <a href="https://utm-degree-explorer.vercel.app" target="_blank" rel="noopener">Live →</a>
-      <a href="https://github.com/Tedd618/UTM-Degree-Explorer" target="_blank" rel="noopener">GitHub →</a>
-    </div>
-  </article>
 
-</div>
+    <article class="project-detail" id="project-detail">
+      <h2>UTM Degree Explorer</h2>
+      <p class="pd-meta">May 2026 · Solo · Local-first Degree Planner</p>
+      <p>Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar &mdash; 2,346 courses and 164 programs scraped and parsed into structured ASTs.</p>
+      <div class="tags">
+        <span class="tag">React</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Vite</span>
+        <span class="tag">Zustand</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">Python</span>
+        <span class="tag">BeautifulSoup</span>
+      </div>
+      <div class="links">
+        <a href="https://utm-degree-explorer.vercel.app" target="_blank" rel="noopener">Live →</a>
+        <a href="https://github.com/Tedd618/UTM-Degree-Explorer" target="_blank" rel="noopener">GitHub →</a>
+      </div>
+    </article>
 
-
-<!-- ════════════════════════════════════
-     BLOG (preview list)
-══════════════════════════════════════ -->
-<div class="view" id="view-blog">
-
-  <article class="post">
-    <a class="comment-numb comment-right">soon</a>
-    <h2><a data-target="post-prereq">Parsing 2,300 Course Prerequisites by Hand</a></h2>
-    <h6>Posted on <a>14th May 2026</a> &nbsp;|&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></h6>
-
-    <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
-
-    <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5"&hellip;</p>
-
-    <p class="read-more"><a data-target="post-prereq">Read more →</a></p>
-  </article>
-
-</div>
-
-
-<!-- ════════════════════════════════════
-     BLOG POST — full
-══════════════════════════════════════ -->
-<div class="view" id="view-post-prereq">
-
-  <p class="blog-back"><a data-target="blog">← Back to Blog</a></p>
-
-  <article class="post">
-    <a class="comment-numb comment-right">soon</a>
-    <h2>Parsing 2,300 Course Prerequisites by Hand</h2>
-    <h6>Posted on <a>14th May 2026</a> &nbsp;|&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></h6>
-
-    <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
-
-    <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5". A rule-based parser felt fragile. An LLM felt expensive and non-deterministic. So I started with the rules.</p>
-
-    <div class="post-figure">A figure would go here.</div>
-
-    <p>The trick was treating each prerequisite as an AST &mdash; <code>COURSE</code>, <code>AND</code>, <code>OR</code>, <code>CREDITS</code>, <code>LEVEL_POOL</code>, with a <code>RAW</code> fallback for the irreducible cases. After five passes the parser covers ~86% of programs cleanly, and the remaining 14% degrade gracefully into a "see calendar" badge instead of a hard failure.</p>
-
-    <p>More writing soon &mdash; this blog page is mocked for now.</p>
-  </article>
-
-</div>
-
-
-<!-- ════════════════════════════════════
-     RESUME
-══════════════════════════════════════ -->
-<div class="view" id="view-resume">
-
-  <section class="resume">
-    <div class="resume-actions">
-      <a href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener">Open in new tab →</a>
-      <a href="Taehyeon_Kim_Resume.pdf" download>Download PDF →</a>
-    </div>
-    <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#zoom=120&navpanes=0&toolbar=1" title="Taehyeon Kim — Resume"></iframe>
   </section>
 
+
+  <!-- ════════════════════════════════════
+       BLOG
+  ════════════════════════════════════ -->
+  <section class="view" id="view-blog">
+
+    <article class="blog-post">
+      <header class="blog-header">
+        <h2 class="blog-title"><a data-target="post-prereq">Parsing 2,300 Course Prerequisites by Hand</a></h2>
+        <span class="blog-comments">soon</span>
+      </header>
+      <p class="blog-meta">Posted on <a>14th May 2026</a>&nbsp; |&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></p>
+
+      <div class="blog-body">
+        <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
+
+        <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5"&hellip;</p>
+
+        <p class="read-more"><a data-target="post-prereq">Read more →</a></p>
+      </div>
+    </article>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════
+       BLOG POST (full)
+  ════════════════════════════════════ -->
+  <section class="view" id="view-post-prereq">
+
+    <article class="blog-post">
+      <p class="blog-back"><a data-target="blog">← Back to Blog</a></p>
+
+      <header class="blog-header">
+        <h2 class="blog-title">Parsing 2,300 Course Prerequisites by Hand</h2>
+        <span class="blog-comments">soon</span>
+      </header>
+      <p class="blog-meta">Posted on <a>14th May 2026</a>&nbsp; |&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></p>
+
+      <div class="blog-body">
+        <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
+
+        <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5". A rule-based parser felt fragile. An LLM felt expensive and non-deterministic. So I started with the rules.</p>
+
+        <div class="blog-figure">A figure would go here.</div>
+
+        <p>The trick was treating each prerequisite as an AST &mdash; <code>COURSE</code>, <code>AND</code>, <code>OR</code>, <code>CREDITS</code>, <code>LEVEL_POOL</code>, with a <code>RAW</code> fallback for the irreducible cases. After five passes the parser covers ~86% of programs cleanly, and the remaining 14% degrade gracefully into a "see calendar" badge instead of a hard failure.</p>
+
+        <p>More writing soon &mdash; this blog page is mocked for now.</p>
+      </div>
+    </article>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════
+       RESUME
+  ════════════════════════════════════ -->
+  <section class="view" id="view-resume">
+
+    <div class="resume-wrap">
+      <div class="resume-actions">
+        <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener">Open in new tab →</a>
+        <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" download>Download PDF →</a>
+      </div>
+      <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#zoom=120&navpanes=0&toolbar=1" title="Taehyeon Kim — Resume"></iframe>
+    </div>
+
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    © Taehyeon Kim 2026
+  </footer>
+
 </div>
-
-
-<!-- ════════════════════════════════════
-     FOOTER
-══════════════════════════════════════ -->
-<footer class="site-footer">
-  © Taehyeon Kim 2026
-</footer>
-
 
 <script>
-  const VIEWS = ['about', 'projects', 'blog', 'post-prereq', 'resume'];
-  // Map sub-view → top-level nav tab to keep highlighted
+  const VIEWS = ['about', 'projects', 'blog', 'resume', 'post-prereq'];
+  // Which top-level nav tab to highlight for each view
   const VIEW_NAV = { 'post-prereq': 'blog' };
 
   function showView(id, pushState) {
@@ -205,8 +727,8 @@
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
     const navId = VIEW_NAV[id] || id;
-    document.querySelectorAll('nav ul li a').forEach(a => {
-      a.classList.toggle('selected', a.dataset.target === navId);
+    document.querySelectorAll('nav.tabs a').forEach(a => {
+      a.classList.toggle('active', a.dataset.target === navId);
     });
     if (pushState) {
       const hash = id === 'about' ? '' : '#' + id;
@@ -215,6 +737,7 @@
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
+  // Any element with data-target navigates
   document.addEventListener('click', e => {
     const t = e.target.closest('[data-target]');
     if (!t) return;
@@ -222,6 +745,7 @@
     showView(t.dataset.target, true);
   });
 
+  // Browser back/forward
   window.addEventListener('popstate', e => {
     const id = e.state?.view ?? location.hash.slice(1) ?? 'about';
     showView(id, false);
@@ -232,12 +756,12 @@
   history.replaceState({ view: initial }, '', location.href);
   showView(initial, false);
 
-  // Project detail swap
+  // Project card → detail swap
   const PROJECTS = {
     utm: {
       title: 'UTM Degree Explorer',
       meta: 'May 2026 · Solo · Local-first Degree Planner',
-      desc: "Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar — 2,346 courses and 164 programs scraped and parsed into structured ASTs.",
+      desc: 'Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar — 2,346 courses and 164 programs scraped and parsed into structured ASTs.',
       tags: ['React','TypeScript','Vite','Zustand','Tailwind','Supabase','Python','BeautifulSoup'],
       links: [['Live','https://utm-degree-explorer.vercel.app'],['GitHub','https://github.com/Tedd618/UTM-Degree-Explorer']]
     },
@@ -271,20 +795,19 @@
     }
   };
 
-  document.querySelectorAll('.design-thumbnails li a[data-project]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const p = PROJECTS[a.dataset.project];
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const p = PROJECTS[card.dataset.project];
       if (!p) return;
-      const d = document.getElementById('project-detail');
-      d.innerHTML = `
+      const detail = document.getElementById('project-detail');
+      detail.innerHTML = `
         <h2>${p.title}</h2>
         <p class="pd-meta">${p.meta}</p>
         <p>${p.desc}</p>
         <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         <div class="links">${p.links.map(l => `<a href="${l[1]}" target="_blank" rel="noopener">${l[0]} →</a>`).join('')}</div>
       `;
-      d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 </script>
