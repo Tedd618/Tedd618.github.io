@@ -54,21 +54,16 @@
 
     /* ─── Logo ──────────────────────────────────────────── */
     .logo {
+      display: block;
       width: 88px;
-      height: 88px;
+      height: 110px;
       margin: 0 auto 1.75rem;
-      border-radius: 50%;
-      overflow: hidden;
-      background: var(--bg-band);
-      border: 0.5px solid var(--rule);
     }
     .logo img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: 88% 92%;
-      transform: scale(2.4);
-      transform-origin: 88% 92%;
+      object-fit: contain;
+      display: block;
     }
 
     /* ─── Nav (pill tabs) ───────────────────────────────── */
@@ -461,6 +456,41 @@
     }
 
     /* ═══════════════════════════════════════════════════════
+       RESUME
+    ═══════════════════════════════════════════════════════ */
+    .resume-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .resume-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .resume-link {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--text-muted);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .resume-link:hover { color: var(--text); border-color: var(--text); }
+
+    .resume-frame {
+      width: 100%;
+      height: 900px;
+      border: 0.5px solid var(--rule);
+      border-radius: 2px;
+      background: var(--bg-band);
+    }
+
+    /* ═══════════════════════════════════════════════════════
        Responsive
     ═══════════════════════════════════════════════════════ */
     @media (max-width: 640px) {
@@ -468,8 +498,7 @@
       nav.tabs a { padding: 0.45rem 0.75rem; font-size: 11px; }
       .featured-strip-inner { grid-template-columns: repeat(2, 1fr); }
       .project-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-layout { grid-template-columns: 1fr; }
-      .gallery-thumbs { grid-template-columns: repeat(6, 1fr); }
+      .resume-frame { height: 600px; }
     }
   </style>
 </head>
@@ -480,7 +509,7 @@
 
   <!-- Logo / avatar -->
   <a href="#about" data-target="about" class="logo" aria-label="Home">
-    <img src="IMG_1987.jpeg" alt="Taehyeon Kim" />
+    <img src="logo.png" alt="Taehyeon Kim" />
   </a>
 
   <!-- Nav -->
@@ -488,6 +517,7 @@
     <a data-target="about">About&nbsp;Me</a>
     <a data-target="projects">Projects</a>
     <a data-target="blog">Blog</a>
+    <a data-target="resume">Resume</a>
   </nav>
 
 
@@ -607,6 +637,22 @@
   </section>
 
 
+  <!-- ════════════════════════════════════
+       RESUME
+  ════════════════════════════════════ -->
+  <section class="view" id="view-resume">
+
+    <div class="resume-wrap">
+      <div class="resume-actions">
+        <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener">Open in new tab →</a>
+        <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" download>Download PDF →</a>
+      </div>
+      <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#view=FitH" title="Taehyeon Kim — Resume"></iframe>
+    </div>
+
+  </section>
+
+
   <!-- Footer -->
   <footer class="site-footer">
     © Taehyeon Kim 2026
@@ -615,7 +661,7 @@
 </div>
 
 <script>
-  const VIEWS = ['about', 'projects', 'blog'];
+  const VIEWS = ['about', 'projects', 'blog', 'resume'];
 
   function showView(id, pushState) {
     if (!VIEWS.includes(id)) id = 'about';
