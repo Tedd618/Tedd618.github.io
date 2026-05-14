@@ -25,10 +25,9 @@
 /* ─── Base ────────────────────────────────────────────────── */
 html, body {
   margin: 0;
-  font-family: 'Mulish', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: 300;
-  letter-spacing: 0.005em;
   line-height: 26px;
   color: var(--text);
   background-color: var(--bg);
