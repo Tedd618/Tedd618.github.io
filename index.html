@@ -158,11 +158,11 @@
       line-height: 1.4;
     }
 
-    /* Distinct tints per tile so the strip reads visually */
-    .tile-utm     { background: linear-gradient(135deg, #4A6B8A 0%, #2F4866 100%); }
-    .tile-yose    { background: linear-gradient(135deg, #6B8268 0%, #455C42 100%); }
-    .tile-tango   { background: linear-gradient(135deg, #B07A6B 0%, #8A554A 100%); }
-    .tile-tamdal  { background: linear-gradient(135deg, #8E7AA0 0%, #6A5680 100%); }
+    /* Project screenshots (with dark overlay so the labels stay readable) */
+    .tile-utm    { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/UTM_degree_explorer.png') center/cover; }
+    .tile-yose   { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/Yosemite.png') center/cover; }
+    .tile-tango  { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/Tango.png') center/cover; }
+    .tile-tamdal { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/Tamdal.png') center/cover; }
 
     /* ─── Social icons ──────────────────────────────────── */
     .socials {
@@ -253,11 +253,12 @@
     }
     .project-card:hover { transform: translateY(-3px); }
 
-    .project-card.utm   { background: linear-gradient(135deg, #5B7FA3 0%, #2F4866 100%); }
-    .project-card.yose  { background: linear-gradient(135deg, #7E9A78 0%, #455C42 100%); }
-    .project-card.tango { background: linear-gradient(135deg, #C58D7A 0%, #8A554A 100%); }
-    .project-card.tamdal{ background: linear-gradient(135deg, #A491BB 0%, #6A5680 100%); }
-    .project-card.paint { background: linear-gradient(135deg, #B5AE9A 0%, #807A66 100%); }
+    /* Bottom-gradient overlay so name + date are legible against the screenshot */
+    .project-card.utm    { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/UTM_degree_explorer.png') center/cover; }
+    .project-card.yose   { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/Yosemite.png') center/cover; }
+    .project-card.tango  { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/Tango.png') center/cover; }
+    .project-card.tamdal { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/Tamdal.png') center/cover; }
+    .project-card.paint  { background: linear-gradient(135deg, #B5AE9A 0%, #807A66 100%); }
 
     .project-card .pc-name {
       font-family: 'Source Sans 3', 'PT Sans', sans-serif;
