@@ -396,82 +396,14 @@
     /* ═══════════════════════════════════════════════════════
        BLOG
     ═══════════════════════════════════════════════════════ */
-    .blog-post { max-width: 620px; margin: 0 auto; }
-
-    .blog-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .blog-title {
+    .blog-empty {
+      text-align: center;
       font-family: 'Source Sans 3', 'PT Sans', sans-serif;
-      font-weight: 500;
-      font-size: 1.6rem;
-      line-height: 1.25;
-      color: var(--text);
-    }
-
-    .blog-comments {
-      flex-shrink: 0;
-      font-family: 'PT Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--text-soft);
-      background: var(--pill);
-      padding: 0.25rem 0.7rem;
-      border-radius: 2px;
-      white-space: nowrap;
-    }
-
-    .blog-meta {
-      font-family: 'PT Sans', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.04em;
+      font-size: 1rem;
       color: var(--text-muted);
-      margin-bottom: 1.4rem;
-    }
-    .blog-meta a {
-      border-bottom: 1px solid var(--text-muted);
-      padding-bottom: 1px;
+      padding: 3rem 0;
     }
 
-    .blog-body p { margin-bottom: 1.25rem; }
-
-    .blog-title a { color: inherit; cursor: pointer; }
-    .blog-title a:hover { color: var(--text-soft); }
-
-    .read-more a {
-      font-family: 'PT Sans', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      border-bottom: 1px solid var(--text-muted);
-      padding-bottom: 1px;
-      cursor: pointer;
-    }
-    .read-more a:hover { color: var(--text); }
-
-    .blog-back {
-      max-width: 620px;
-      margin: 0 auto 1.25rem;
-    }
-    .blog-back a {
-      font-family: 'PT Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-    .blog-back a:hover { color: var(--text); }
-    .blog-body a.inline {
-      border-bottom: 1px solid var(--text-muted);
-      padding-bottom: 1px;
-    }
 
     .blog-figure {
       margin: 1.75rem 0;
@@ -645,53 +577,7 @@
        BLOG
   ════════════════════════════════════ -->
   <section class="view" id="view-blog">
-
-    <article class="blog-post">
-      <header class="blog-header">
-        <h2 class="blog-title"><a data-target="post-prereq">Parsing 2,300 Course Prerequisites by Hand</a></h2>
-        <span class="blog-comments">soon</span>
-      </header>
-      <p class="blog-meta">Posted on <a>14th May 2026</a>&nbsp; |&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></p>
-
-      <div class="blog-body">
-        <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
-
-        <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5"&hellip;</p>
-
-        <p class="read-more"><a data-target="post-prereq">Read more →</a></p>
-      </div>
-    </article>
-
-  </section>
-
-
-  <!-- ════════════════════════════════════
-       BLOG POST (full)
-  ════════════════════════════════════ -->
-  <section class="view" id="view-post-prereq">
-
-    <article class="blog-post">
-      <p class="blog-back"><a data-target="blog">← Back to Blog</a></p>
-
-      <header class="blog-header">
-        <h2 class="blog-title">Parsing 2,300 Course Prerequisites by Hand</h2>
-        <span class="blog-comments">soon</span>
-      </header>
-      <p class="blog-meta">Posted on <a>14th May 2026</a>&nbsp; |&nbsp; Categories: <a>Engineering</a>, <a>Parsing</a></p>
-
-      <div class="blog-body">
-        <p>A few weeks ago, I shipped <a class="inline" data-target="projects">UTM Degree Explorer</a> &mdash; a local-first degree planner that validates every prerequisite in your plan in real time. To get there, I had to turn the UTM Academic Calendar's prose into something a computer could reason about.</p>
-
-        <p>The calendar describes prerequisites as natural language: "1.0 credit in LIN at the 200-level", "CSC148H5 (or equivalent), excluding CSC209H5", "Any 4.0 credits, including at least one of MAT102H5 or MAT133Y5". A rule-based parser felt fragile. An LLM felt expensive and non-deterministic. So I started with the rules.</p>
-
-        <div class="blog-figure">A figure would go here.</div>
-
-        <p>The trick was treating each prerequisite as an AST &mdash; <code>COURSE</code>, <code>AND</code>, <code>OR</code>, <code>CREDITS</code>, <code>LEVEL_POOL</code>, with a <code>RAW</code> fallback for the irreducible cases. After five passes the parser covers ~86% of programs cleanly, and the remaining 14% degrade gracefully into a "see calendar" badge instead of a hard failure.</p>
-
-        <p>More writing soon &mdash; this blog page is mocked for now.</p>
-      </div>
-    </article>
-
+    <p class="blog-empty">soon.</p>
   </section>
 
 
@@ -719,17 +605,14 @@
 </div>
 
 <script>
-  const VIEWS = ['about', 'projects', 'blog', 'resume', 'post-prereq'];
-  // Which top-level nav tab to highlight for each view
-  const VIEW_NAV = { 'post-prereq': 'blog' };
+  const VIEWS = ['about', 'projects', 'blog', 'resume'];
 
   function showView(id, pushState) {
     if (!VIEWS.includes(id)) id = 'about';
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
-    const navId = VIEW_NAV[id] || id;
     document.querySelectorAll('nav.tabs a').forEach(a => {
-      a.classList.toggle('active', a.dataset.target === navId);
+      a.classList.toggle('active', a.dataset.target === id);
     });
     if (pushState) {
       const hash = id === 'about' ? '' : '#' + id;
