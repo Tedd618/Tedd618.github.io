@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Taehyeon Kim — Resume</title>
+<style>
+  @page { size: Letter; margin: 0.3in 0.55in; }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.9pt;
+    line-height: 1.2;
+    color: #1a1a1a;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 0 0 2px;
+  }
+
+  .contact {
+    text-align: center;
+    font-size: 8.7pt;
+    margin: 0 0 8px;
+  }
+  .contact a { color: #1a1a1a; text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  h2.section {
+    font-size: 10pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 1px;
+    margin: 5px 0 2px;
+  }
+  h2.section:first-of-type { margin-top: 0; }
+
+  p.profile { margin: 0; text-align: justify; }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .row .title { font-weight: bold; }
+  .row .date { font-size: 9pt; white-space: nowrap; flex-shrink: 0; }
+
+  .subtitle {
+    font-style: italic;
+    font-size: 8.4pt;
+    color: #333;
+    margin-bottom: 1px;
+  }
+
+  ul.bullets {
+    margin: 1px 0 4px;
+    padding-left: 14px;
+  }
+  ul.bullets li { margin-bottom: 0px; }
+
+  .entry { margin-bottom: 0; }
+  .entry:last-child ul.bullets { margin-bottom: 0; }
+
+  .skills p { margin: 0 0 1px; }
+  .skills b { font-weight: bold; }
+
+  .additional p { margin: 0 0 1px; }
+  .additional b { font-weight: bold; }
+</style>
+</head>
+<body>
+
+  <h1>Taehyeon Kim</h1>
+  <p class="contact">
+    taehyeonkim618@gmail.com | Mississauga, Ontario | 437-347-4393 |
+    <a href="https://linkedin.com/in/taehyeon-kim">LinkedIn</a> |
+    <a href="https://github.com/Tedd618">GitHub @Tedd618</a> |
+    <a href="https://devpost.com/Tedd618">Devpost @Tedd618</a>
+  </p>
+
+  <h2 class="section">Profile</h2>
+  <p class="profile">Second-year Computer Science specialist at the University of Toronto Mississauga (GPA 3.81/4.00), with a Statistics and Mathematics minor. Builds full-stack systems and ML pipelines from design to deployment — with deliberate attention to architectural tradeoffs, not just working code. Proven ability to scope, decide, and ship in fast-paced hackathon and course environments.</p>
+
+  <h2 class="section">Education</h2>
+  <div class="row">
+    <span class="title">University of Toronto Mississauga</span>
+    <span class="date">2024 – Present</span>
+  </div>
+  <div class="subtitle">B.Sc. Computer Science Specialist | Statistics &amp; Mathematics Minor · GPA: 3.81 / 4.00</div>
+
+  <h2 class="section">Technical Skills</h2>
+  <div class="skills">
+    <p><b>Languages:</b> Python, Java, C, TypeScript, Rust, Bash, SQL</p>
+    <p><b>Frameworks &amp; Tools:</b> FastAPI, Next.js, React, Axum/Tokio, PostgreSQL, Git, Linux, SQLAlchemy, Auth0, Tailwind CSS, Supabase</p>
+    <p><b>Concepts:</b> System Design, OOP, Design Patterns, Data Structures &amp; Algorithms, Scrum / Agile, REST APIs</p>
+    <p><b>AI / ML:</b> scikit-learn, Gemini API, LLM integration, anomaly detection (Isolation Forest, Benford's Law, BiLSTM)</p>
+  </div>
+
+  <h2 class="section">Projects &amp; Hackathons</h2>
+
+  <div class="entry">
+    <div class="row"><span class="title">UTM Degree Explorer — Local-First Degree Planner</span><span class="date">May 2026</span></div>
+    <div class="subtitle">Solo project</div>
+    <ul class="bullets">
+      <li>Built a full-stack degree planner over a fully scraped UTM Academic Calendar (2,346 courses, 164 programs), with a rule-based parser converting prerequisite text into structured ASTs at 86% coverage.</li>
+      <li>Implemented live prerequisite validation and a React/Zustand planner UI with Supabase-backed multi-plan sync and guest mode.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Yosemite — AI Compliance &amp; Fraud Detection Platform</span><span class="date">March 2026</span></div>
+    <div class="subtitle">GenAI Genesis 2026 · Team of 4</div>
+    <ul class="bullets">
+      <li>Designed a hybrid fraud-scoring pipeline (rule-based heuristics, Benford's Law, multi-agent AI) and chose Rust (Axum/Tokio) for the backend to guarantee sub-1s latency under concurrent compliance workloads.</li>
+      <li>Coordinated 7 specialist AI agents (Gemini 2.5 Flash, GPT-OSS-120B, Isolation Forest, BiLSTM, GCN) and implemented real-time sanctions screening against 1M+ entities via the OpenSanctions API.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Tango — Reinvented Job Matching Platform</span><span class="date">February 2026</span></div>
+    <div class="subtitle">DeerHacks V 2026 · Team of 3</div>
+    <ul class="bullets">
+      <li>Designed a Hinge-style mutual-match model to replace keyword-based resume screening, shifting evaluation from credentials to personality-driven profiles.</li>
+      <li>Architected bidirectional matching logic with race-condition handling on PostgreSQL/SQLAlchemy, and integrated Auth0 authentication on a Next.js 15 frontend.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Tamdal (In Progress)</span><span class="date">2024 – Present</span></div>
+    <div class="subtitle">Long-term collaborative project · Team of 3</div>
+    <ul class="bullets">
+      <li>Leading technical development of a math study application; designed a layout-aware AI PDF parser for complex mathematical notation.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Paint</span><span class="date">1 month</span></div>
+    <div class="subtitle">Java GUI Application · Team of 4</div>
+    <ul class="bullets">
+      <li>Led a team of 4 to build a Windows Paint clone in Java, applying MVC design patterns and Scrum methodology.</li>
+    </ul>
+  </div>
+
+  <h2 class="section">Work Experience</h2>
+
+  <div class="entry">
+    <div class="row"><span class="title">Crew Member</span><span class="date">June 2026 – Present</span></div>
+    <div class="subtitle">Chipotle Mexican Grill</div>
+    <ul class="bullets">
+      <li>Manage a high-volume, fast-paced kitchen line, building strong time management and prioritization skills while delivering friendly, consistent customer service during peak rush periods.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Math, Physics &amp; Chemistry Tutor</span><span class="date">September 2024 – Present</span></div>
+    <div class="subtitle">Self-employed</div>
+    <ul class="bullets">
+      <li>Provide personalized academic support to high school students; adapted explanations to individual learning gaps rather than following fixed curricula.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Customer Service Associate</span><span class="date">Summer 2025</span></div>
+    <div class="subtitle">Korean Supermarket</div>
+    <ul class="bullets">
+      <li>Developed conflict resolution and negotiation skills in a high-volume customer-facing environment.</li>
+    </ul>
+  </div>
+
+  <h2 class="section">Leadership</h2>
+  <div class="entry">
+    <div class="row"><span class="title">VP Finance</span><span class="date">2025 – 2026</span></div>
+    <div class="subtitle">UTM Salsa &amp; Bachata Club</div>
+    <ul class="bullets">
+      <li>Managed the club's annual budget and financial operations for a year, overseeing event expenses, sponsorships, and financial reporting for a 100+ member club.</li>
+    </ul>
+  </div>
+
+  <h2 class="section">Additional</h2>
+  <div class="additional">
+    <p><b>Languages:</b> Fluent in English and Korean</p>
+    <p><b>Presentations:</b> Weekly presentation experience over three years; comfortable communicating technical concepts to varied audiences.</p>
+  </div>
+
+</body>
+</html>
