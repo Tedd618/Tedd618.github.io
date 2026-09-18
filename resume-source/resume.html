@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>Taehyeon Kim - Resume</title>
 <style>
-  @page { size: Letter; margin: 0.3in 0.55in; }
+  @page { size: Letter; margin: 0.25in 0.55in; }
 
   * { box-sizing: border-box; }
 
@@ -12,34 +12,34 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 8.9pt;
-    line-height: 1.2;
+    font-size: 8.6pt;
+    line-height: 1.12;
     color: #1a1a1a;
   }
 
   h1 {
     text-align: center;
-    font-size: 18pt;
+    font-size: 16.5pt;
     font-weight: bold;
     margin: 0 0 2px;
   }
 
   .contact {
     text-align: center;
-    font-size: 8.7pt;
-    margin: 0 0 8px;
+    font-size: 8.4pt;
+    margin: 0 0 5px;
   }
   .contact a { color: #1a1a1a; text-decoration: none; }
   .contact a:hover { text-decoration: underline; }
 
   h2.section {
-    font-size: 10pt;
+    font-size: 9.5pt;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     border-bottom: 1px solid #1a1a1a;
     padding-bottom: 1px;
-    margin: 5px 0 2px;
+    margin: 3px 0 2px;
   }
   h2.section:first-of-type { margin-top: 0; }
 
@@ -52,17 +52,17 @@
     gap: 8px;
   }
   .row .title { font-weight: bold; }
-  .row .date { font-size: 9pt; white-space: nowrap; flex-shrink: 0; }
+  .row .date { font-size: 8.8pt; white-space: nowrap; flex-shrink: 0; }
 
   .subtitle {
     font-style: italic;
-    font-size: 8.4pt;
+    font-size: 8.2pt;
     color: #333;
     margin-bottom: 1px;
   }
 
   ul.bullets {
-    margin: 1px 0 4px;
+    margin: 1px 0 2px;
     padding-left: 14px;
   }
   ul.bullets li { margin-bottom: 0px; }
@@ -70,10 +70,10 @@
   .entry { margin-bottom: 0; }
   .entry:last-child ul.bullets { margin-bottom: 0; }
 
-  .skills p { margin: 0 0 1px; }
+  .skills p { margin: 0 0 0px; }
   .skills b { font-weight: bold; }
 
-  .additional p { margin: 0 0 1px; }
+  .additional p { margin: 0 0 0px; }
   .additional b { font-weight: bold; }
 </style>
 </head>
@@ -88,24 +88,44 @@
   </p>
 
   <h2 class="section">Profile</h2>
-  <p class="profile">Second-year Computer Science specialist at the University of Toronto Mississauga (GPA 3.81/4.00), with a Statistics and Mathematics minor. Builds full-stack systems and ML pipelines from design to deployment, paying close attention to architectural tradeoffs rather than just shipping working code. Proven ability to scope, decide, and ship in fast-paced hackathon and course environments.</p>
+  <p class="profile">Third-year Computer Science specialist at the University of Toronto (GPA 3.65/4.00), with a Statistics and Mathematics minor. Builds full-stack systems, ML pipelines and models, and system architecture from design to deployment, with deliberate attention to tradeoffs rather than just working code. Comfortable scoping ambiguous problems and shipping under time pressure, solo or on a team.</p>
 
   <h2 class="section">Education</h2>
   <div class="row">
-    <span class="title">University of Toronto Mississauga</span>
+    <span class="title">University of Toronto</span>
     <span class="date">2024 – Present</span>
   </div>
-  <div class="subtitle">B.Sc. Computer Science Specialist | Statistics &amp; Mathematics Minor · GPA: 3.81 / 4.00</div>
+  <div class="subtitle">B.Sc. Computer Science Specialist | Statistics &amp; Mathematics Minor · GPA: 3.65 / 4.00</div>
 
   <h2 class="section">Technical Skills</h2>
   <div class="skills">
     <p><b>Languages:</b> Python, Java, C, TypeScript, Rust, Bash, SQL</p>
     <p><b>Frameworks &amp; Tools:</b> FastAPI, Next.js, React, Axum/Tokio, PostgreSQL, Git, Linux, SQLAlchemy, Auth0, Tailwind CSS, Supabase</p>
+    <p><b>Cloud:</b> AWS (IAM, VPC, EC2, S3, Lambda); pursuing AWS Certified Solutions Architect Associate</p>
     <p><b>Concepts:</b> System Design, OOP, Design Patterns, Data Structures &amp; Algorithms, Scrum / Agile, REST APIs</p>
     <p><b>AI / ML:</b> scikit-learn, Gemini API, LLM integration, anomaly detection (Isolation Forest, Benford's Law, BiLSTM)</p>
   </div>
 
   <h2 class="section">Projects &amp; Hackathons</h2>
+
+  <div class="entry">
+    <div class="row"><span class="title">MatiMath (AI Math Tutoring App)</span><span class="date">2024 – Present</span></div>
+    <div class="subtitle">Long-term collaborative project · Team of 3 · Preparing for Google Play launch</div>
+    <ul class="bullets">
+      <li>Leading technical development of a Flutter tablet app that pairs an AI tutor character with step-based math exercises (fill-in-blank, matching, drawing, handwriting) and real-time TTS narration.</li>
+      <li>Built Google Play Billing with server-side receipt verification through Firebase Cloud Functions as the sole writer of purchase entitlement, and cut the baked TTS asset pipeline from 476MB to 353MB.</li>
+      <li>Wrote the privacy policy and account-deletion flow required for Google Play Families compliance ahead of launch.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">chalk-talk (AI Blackboard Tutor Research)</span><span class="date">2026 – Present</span></div>
+    <div class="subtitle">Solo research project</div>
+    <ul class="bullets">
+      <li>Designing a closed-loop tutoring architecture where a vision-language model reads the canvas each step and decides the next spoken phrase or stroke, instead of generating a full script upfront.</li>
+      <li>Built a working MVP that pre-generates a full lesson as JSON and animates it stroke-by-stroke with synced narration, used as the baseline and training-data source for the closed-loop research.</li>
+    </ul>
+  </div>
 
   <div class="entry">
     <div class="row"><span class="title">UTM Degree Explorer (Local-First Degree Planner)</span><span class="date">May 2026</span></div>
@@ -120,8 +140,8 @@
     <div class="row"><span class="title">Yosemite (AI Compliance &amp; Fraud Detection Platform)</span><span class="date">March 2026</span></div>
     <div class="subtitle">GenAI Genesis 2026 · Team of 4</div>
     <ul class="bullets">
-      <li>Designed a hybrid fraud-scoring pipeline (rule-based heuristics, Benford's Law, multi-agent AI) and chose Rust (Axum/Tokio) for the backend to guarantee sub-1s latency under concurrent compliance workloads.</li>
-      <li>Coordinated 7 specialist AI agents (Gemini 2.5 Flash, GPT-OSS-120B, Isolation Forest, BiLSTM, GCN) and implemented real-time sanctions screening against 1M+ entities via the OpenSanctions API.</li>
+      <li>Built the Rust (Axum) fraud-report API and integrated Google Gemini Vision and an LLM service for automated invoice and document analysis.</li>
+      <li>Built the Next.js risk dashboard (risk overview, flagged transactions, protection score) and the PDF upload flow for the compliance platform.</li>
     </ul>
   </div>
 
@@ -129,34 +149,18 @@
     <div class="row"><span class="title">Tango (Reinvented Job Matching Platform)</span><span class="date">February 2026</span></div>
     <div class="subtitle">DeerHacks V 2026 · Team of 3</div>
     <ul class="bullets">
-      <li>Designed a Hinge-style mutual-match model to replace keyword-based resume screening, shifting evaluation from credentials to personality-driven profiles.</li>
-      <li>Architected bidirectional matching logic with race-condition handling on PostgreSQL/SQLAlchemy, and integrated Auth0 authentication on a Next.js 15 frontend.</li>
-    </ul>
-  </div>
-
-  <div class="entry">
-    <div class="row"><span class="title">Tamdal (In Progress)</span><span class="date">2024 – Present</span></div>
-    <div class="subtitle">Long-term collaborative project · Team of 3</div>
-    <ul class="bullets">
-      <li>Leading technical development of a math study application; designed a layout-aware AI PDF parser for complex mathematical notation.</li>
-    </ul>
-  </div>
-
-  <div class="entry">
-    <div class="row"><span class="title">Paint</span><span class="date">1 month</span></div>
-    <div class="subtitle">Java GUI Application · Team of 4</div>
-    <ul class="bullets">
-      <li>Led a team of 4 to build a Windows Paint clone in Java, applying MVC design patterns and Scrum methodology.</li>
+      <li>Implemented the core swipe/match feature (role-based discover queue, swipe UI, recruiter inbox) and integrated Auth0 authentication on a Next.js 15 frontend.</li>
+      <li>Built a real-time chat feature with a matches sidebar and unread-message badges, and migrated image uploads from filesystem storage to PostgreSQL.</li>
     </ul>
   </div>
 
   <h2 class="section">Work Experience</h2>
 
   <div class="entry">
-    <div class="row"><span class="title">Crew Member</span><span class="date">June 2026 – Present</span></div>
+    <div class="row"><span class="title">Crew Member</span><span class="date">June 2026 – September 2026</span></div>
     <div class="subtitle">Chipotle Mexican Grill</div>
     <ul class="bullets">
-      <li>Manage a high-volume, fast-paced kitchen line, building strong time management and prioritization skills while delivering friendly, consistent customer service during peak rush periods.</li>
+      <li>Ran a high-volume, fast-paced kitchen line, building strong time management and prioritization skills while delivering friendly, consistent customer service during peak rush periods.</li>
     </ul>
   </div>
 
@@ -177,6 +181,15 @@
   </div>
 
   <h2 class="section">Leadership</h2>
+  <div class="entry">
+    <div class="row"><span class="title">Finance Associate</span><span class="date">2026 – Present</span></div>
+    <div class="subtitle">UTM Mathematical &amp; Computational Sciences Society (MCSS)</div>
+    <ul class="bullets">
+      <li>Volunteer on the student executive team representing all full-time Mathematical &amp; Computational Sciences majors at UTM, supporting audit planning and financial reporting.</li>
+      <li>Help run department events and day-to-day club operations alongside the team, in a volunteer capacity.</li>
+    </ul>
+  </div>
+
   <div class="entry">
     <div class="row"><span class="title">VP Finance</span><span class="date">2025 – 2026</span></div>
     <div class="subtitle">UTM Salsa &amp; Bachata Club</div>
