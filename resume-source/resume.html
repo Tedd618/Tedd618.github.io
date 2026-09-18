@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>Taehyeon Kim - Resume</title>
 <style>
-  @page { size: Letter; margin: 0.25in 0.55in; }
+  @page { size: Letter; margin: 0.35in 0.6in; }
 
   * { box-sizing: border-box; }
 
@@ -12,34 +12,34 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 8.6pt;
-    line-height: 1.12;
+    font-size: 9pt;
+    line-height: 1.25;
     color: #1a1a1a;
   }
 
   h1 {
     text-align: center;
-    font-size: 16.5pt;
+    font-size: 18pt;
     font-weight: bold;
-    margin: 0 0 2px;
+    margin: 0 0 3px;
   }
 
   .contact {
     text-align: center;
-    font-size: 8.4pt;
-    margin: 0 0 5px;
+    font-size: 8.8pt;
+    margin: 0 0 9px;
   }
   .contact a { color: #1a1a1a; text-decoration: none; }
   .contact a:hover { text-decoration: underline; }
 
   h2.section {
-    font-size: 9.5pt;
+    font-size: 10.2pt;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     border-bottom: 1px solid #1a1a1a;
-    padding-bottom: 1px;
-    margin: 3px 0 2px;
+    padding-bottom: 2px;
+    margin: 8px 0 3px;
   }
   h2.section:first-of-type { margin-top: 0; }
 
@@ -52,28 +52,28 @@
     gap: 8px;
   }
   .row .title { font-weight: bold; }
-  .row .date { font-size: 8.8pt; white-space: nowrap; flex-shrink: 0; }
+  .row .date { font-size: 9pt; white-space: nowrap; flex-shrink: 0; }
 
   .subtitle {
     font-style: italic;
-    font-size: 8.2pt;
+    font-size: 8.5pt;
     color: #333;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
   }
 
   ul.bullets {
-    margin: 1px 0 2px;
-    padding-left: 14px;
+    margin: 2px 0 5px;
+    padding-left: 15px;
   }
-  ul.bullets li { margin-bottom: 0px; }
+  ul.bullets li { margin-bottom: 1px; }
 
-  .entry { margin-bottom: 0; }
+  .entry { margin-bottom: 2px; }
   .entry:last-child ul.bullets { margin-bottom: 0; }
 
-  .skills p { margin: 0 0 0px; }
+  .skills p { margin: 0 0 2px; }
   .skills b { font-weight: bold; }
 
-  .additional p { margin: 0 0 0px; }
+  .additional p { margin: 0 0 2px; }
   .additional b { font-weight: bold; }
 </style>
 </head>
@@ -110,11 +110,11 @@
 
   <div class="entry">
     <div class="row"><span class="title">MatiMath (AI Math Tutoring App)</span><span class="date">2024 – Present</span></div>
-    <div class="subtitle">Long-term collaborative project · Team of 3 · Preparing for Google Play launch</div>
+    <div class="subtitle">Long-term collaborative project · Team of 3</div>
     <ul class="bullets">
       <li>Leading technical development of a Flutter tablet app that pairs an AI tutor character with step-based math exercises (fill-in-blank, matching, drawing, handwriting) and real-time TTS narration.</li>
       <li>Built Google Play Billing with server-side receipt verification through Firebase Cloud Functions as the sole writer of purchase entitlement, and cut the baked TTS asset pipeline from 476MB to 353MB.</li>
-      <li>Wrote the privacy policy and account-deletion flow required for Google Play Families compliance ahead of launch.</li>
+      <li>Wrote the privacy policy and account-deletion flow required for Google Play Families compliance.</li>
     </ul>
   </div>
 
@@ -142,6 +142,15 @@
     <ul class="bullets">
       <li>Built the Rust (Axum) fraud-report API and integrated Google Gemini Vision and an LLM service for automated invoice and document analysis.</li>
       <li>Built the Next.js risk dashboard (risk overview, flagged transactions, protection score) and the PDF upload flow for the compliance platform.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Felix and Friends' ML Challenge (CSC311 Course Project)</span><span class="date">Winter 2026</span></div>
+    <div class="subtitle">University of Toronto · Team of 4</div>
+    <ul class="bullets">
+      <li>Ran feature-engineering ablations (StandardScaler normalization, TF-IDF vs. numeric-only) across three model families on a 3-class painting-classification task, showing TF-IDF removal dropped Bernoulli Naive Bayes accuracy from 93.5% to 76.7% and shaping the final unscaled, full-feature preprocessing pipeline.</li>
+      <li>Analyzed and wrote up feature distributions (numeric, Likert, categorical) across 1,686 survey responses; the team's final neural network reached 94% test accuracy (macro F1 0.94).</li>
     </ul>
   </div>
 
