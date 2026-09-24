@@ -52,6 +52,7 @@
     gap: 8px;
   }
   .row .title { font-weight: bold; }
+  .row .title .stack { font-weight: normal; }
   .row .date { font-size: 9pt; white-space: nowrap; flex-shrink: 0; }
 
   .subtitle {
@@ -88,7 +89,7 @@
   </p>
 
   <h2 class="section">Profile</h2>
-  <p class="profile">Third-year Computer Science specialist at the University of Toronto (GPA 3.65/4.00), focused on machine learning and system architecture. Builds full-stack systems end to end, from production backend infrastructure and billing systems to ML pipelines, models, and fraud-detection experimentation, with deliberate attention to tradeoffs rather than just working code.</p>
+  <p class="profile">Third-year Computer Science specialist at the University of Toronto (GPA 3.65/4.00), focused on machine learning and system architecture. Builds full-stack web apps, data pipelines, and ML experiments end to end, from an idea to a working, documented result.</p>
 
   <h2 class="section">Education</h2>
   <div class="row">
@@ -109,66 +110,65 @@
   <h2 class="section">Projects &amp; Hackathons</h2>
 
   <div class="entry">
-    <div class="row"><span class="title">chalk-talk (AI Blackboard Tutor Research)</span><span class="date">May 2026 – September 2026</span></div>
-    <div class="subtitle">Solo research project · github.com/Tedd618/chalk-talk</div>
+    <div class="row"><span class="title">chalk-talk <span class="stack">| Python, PyTorch, OpenCV, Whisper</span></span><span class="date">May 2026 – September 2026</span></div>
+    <div class="subtitle">AI blackboard tutor research · Solo · github.com/Tedd618/chalk-talk</div>
     <ul class="bullets">
-      <li>Built a pipeline that turned 1,191 YouTube math lecture videos into a dataset matching what the teacher says with what they write, stroke by stroke, running it in parallel across 8 to 12 lab computers.</li>
-      <li>Ran a controlled experiment (7 setups, each trained 3 times) on whether a model can use a teacher's writing and speech to predict each other: the writing helped predict the next word, the speech did not help predict the pen, and combining both in one model did more harm than good. Wrote up the findings in a report.</li>
-      <li>Built a browser player that reads a lesson script and speaks and draws it stroke by stroke, as the base for a future tutor that plans its own lessons.</li>
+      <li>Built a pipeline that turns YouTube math lectures into a dataset pairing a teacher's speech with their handwriting, processing 1,191 videos across multiple lab computers.</li>
+      <li>Trained a small model and ran experiments to test whether speech and writing help predict each other; documented the findings in a written report.</li>
     </ul>
   </div>
 
   <div class="entry">
-    <div class="row"><span class="title">UTM Degree Explorer (Local-First Degree Planner)</span><span class="date">May 2026</span></div>
-    <div class="subtitle">Solo project</div>
+    <div class="row"><span class="title">UTM Degree Explorer <span class="stack">| React, Zustand, Supabase, Python</span></span><span class="date">May 2026</span></div>
+    <div class="subtitle">Degree planning web app for UTM students · Solo · github.com/Tedd618/UTM-Degree-Explorer</div>
     <ul class="bullets">
-      <li>Built a full-stack degree planner over a fully scraped UTM Academic Calendar (2,346 courses, 164 programs), with a rule-based parser converting prerequisite text into structured ASTs at 86% coverage.</li>
-      <li>Implemented live prerequisite validation and a React/Zustand planner UI with Supabase-backed multi-plan sync and guest mode.</li>
+      <li>Built a web app that helps students plan their degree by automatically checking course prerequisites and program requirements as they add courses.</li>
+      <li>Scraped the UTM course calendar with Python (2,346 courses, 164 programs) and wrote a parser that turns prerequisite text into structured rules (86% coverage).</li>
     </ul>
   </div>
 
   <div class="entry">
-    <div class="row"><span class="title">Yosemite (AI Compliance &amp; Fraud Detection Platform)</span><span class="date">March 2026</span></div>
-    <div class="subtitle">GenAI Genesis 2026 · Team of 4</div>
+    <div class="row"><span class="title">Yosemite <span class="stack">| Next.js, Gemini API</span></span><span class="date">March 2026</span></div>
+    <div class="subtitle">AI fraud-detection platform for small businesses · GenAI Genesis 2026 hackathon · Team of 4</div>
     <ul class="bullets">
-      <li>Integrated Google Gemini Vision and an LLM service into the fraud-report pipeline for automated invoice and document analysis.</li>
-      <li>Built the Next.js risk dashboard (risk overview, flagged transactions, protection score) and the PDF upload flow for the compliance platform.</li>
+      <li>Built the risk dashboard (risk overview, flagged transactions) and PDF invoice upload in Next.js.</li>
+      <li>Connected the Gemini API to analyze uploaded invoices and documents for signs of fraud.</li>
     </ul>
   </div>
 
   <div class="entry">
-    <div class="row"><span class="title">Multi-Class Painting Classification Model (CSC311 Course Project)</span><span class="date">Winter 2026</span></div>
-    <div class="subtitle">University of Toronto · Team of 4</div>
+    <div class="row"><span class="title">Painting Classification Model <span class="stack">| Python, scikit-learn, NumPy</span></span><span class="date">Winter 2026</span></div>
+    <div class="subtitle">CSC311 course project · Team of 4 · github.com/Tedd618/painting-classification-ml</div>
     <ul class="bullets">
-      <li>Ran feature-engineering ablations (StandardScaler normalization, TF-IDF vs. numeric-only) across three model families on a 3-class painting-classification task, showing TF-IDF removal dropped Bernoulli Naive Bayes accuracy from 93.5% to 76.7% and shaping the final unscaled, full-feature preprocessing pipeline.</li>
-      <li>Analyzed and wrote up feature distributions (numeric, Likert, categorical) across 1,686 survey responses; the team's final neural network reached 94% test accuracy (macro F1 0.94).</li>
+      <li>Built a model that predicts which of three famous paintings a person is describing from 1,686 survey responses; the team's final neural network reached 94% test accuracy.</li>
+      <li>Explored the survey data and compared how data preparation choices affected three types of models (Random Forest, neural network, Naive Bayes).</li>
     </ul>
   </div>
 
   <div class="entry">
-    <div class="row"><span class="title">mysh (Unix Shell in C)</span><span class="date">Winter 2026</span></div>
-    <div class="subtitle">CSC209 Course Project · Individual</div>
+    <div class="row"><span class="title">mysh <span class="stack">| C</span></span><span class="date">Winter 2026</span></div>
+    <div class="subtitle">Unix shell · CSC209 course project · Individual · github.com/Tedd618/mysh</div>
     <ul class="bullets">
-      <li>Built a Unix shell in C from a course skeleton: builtins (cd, ls, cat, wc, ps, kill), external command execution via fork/execvp, and shell variable expansion.</li>
-      <li>Implemented multi-stage pipelines with pipe/dup2, background jobs with SIGCHLD reaping, and SIGINT handling.</li>
+      <li>Built a command-line shell in C with built-in commands (cd, ls, cat, wc, ps, kill) that also runs other programs on the system.</li>
+      <li>Implemented command pipelines (a | b), background jobs (&amp;), and shell variables using Linux process and signal handling.</li>
     </ul>
   </div>
 
   <div class="entry">
-    <div class="row"><span class="title">Tango (Reinvented Job Matching Platform)</span><span class="date">February 2026</span></div>
-    <div class="subtitle">DeerHacks V 2026 · Team of 3</div>
+    <div class="row"><span class="title">Tango <span class="stack">| Next.js, FastAPI, PostgreSQL, Auth0</span></span><span class="date">February 2026</span></div>
+    <div class="subtitle">Job-matching app · DeerHacks V 2026 hackathon · Team of 3 · github.com/Tedd618/tango</div>
     <ul class="bullets">
-      <li>Implemented the core swipe/match feature (role-based discover queue, swipe UI, recruiter inbox) and integrated Auth0 authentication on a Next.js 15 frontend.</li>
-      <li>Built a real-time chat feature with a matches sidebar and unread-message badges, and migrated image uploads from filesystem storage to PostgreSQL.</li>
+      <li>Built a Hinge-style job-matching app where applicants and recruiters swipe on each other, and a match unlocks a chat.</li>
+      <li>Implemented the swipe and match flow, real-time chat with unread badges, and Auth0 login; moved photo storage into PostgreSQL.</li>
     </ul>
   </div>
 
   <div class="entry">
-    <div class="row"><span class="title">Paint Clone (Java Desktop GUI)</span><span class="date">1 month</span></div>
-    <div class="subtitle">Team of 4</div>
+    <div class="row"><span class="title">Paint Clone <span class="stack">| Java</span></span><span class="date">1 month</span></div>
+    <div class="subtitle">Desktop drawing app · Team of 4</div>
     <ul class="bullets">
-      <li>Led a team of 4 to build a Windows Paint clone with extended features in Java, applying MVC design patterns and Scrum methodology.</li>
-      <li>Managed sprint planning and role assignment across the project lifecycle.</li>
+      <li>Built a Windows Paint-style desktop drawing app in Java with extra features, organized around the MVC design pattern.</li>
+      <li>Led the team's sprint planning and task assignment using Scrum.</li>
     </ul>
   </div>
 
