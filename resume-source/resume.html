@@ -102,7 +102,7 @@
     <p><b>Languages:</b> Python, Java, C, Bash, SQL</p>
     <p><b>Frameworks &amp; Tools:</b> FastAPI, Next.js, React, PostgreSQL, Git, Linux, Auth0, Tailwind CSS, Supabase</p>
     <p><b>Cloud:</b> AWS (IAM, VPC, EC2, S3, Lambda); pursuing AWS Certified Solutions Architect Associate</p>
-    <p><b>Concepts:</b> System Design, OOP, Design Patterns, Data Structures &amp; Algorithms, Scrum / Agile, REST APIs</p>
+    <p><b>Concepts:</b> System Design, Systems Programming (processes, pipes, signals, sockets), OOP, Design Patterns, Data Structures &amp; Algorithms, Scrum / Agile, REST APIs</p>
     <p><b>AI / ML:</b> NumPy, scikit-learn, Gemini API, LLM integration</p>
   </div>
 
@@ -132,6 +132,15 @@
     <ul class="bullets">
       <li>Ran feature-engineering ablations (StandardScaler normalization, TF-IDF vs. numeric-only) across three model families on a 3-class painting-classification task, showing TF-IDF removal dropped Bernoulli Naive Bayes accuracy from 93.5% to 76.7% and shaping the final unscaled, full-feature preprocessing pipeline.</li>
       <li>Analyzed and wrote up feature distributions (numeric, Likert, categorical) across 1,686 survey responses; the team's final neural network reached 94% test accuracy (macro F1 0.94).</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">mysh (Unix Shell in C)</span><span class="date">Winter 2026</span></div>
+    <div class="subtitle">CSC209 Course Project · Individual</div>
+    <ul class="bullets">
+      <li>Built a Unix shell in C from scratch: builtins (cd, ls, cat, wc, ps, kill), external commands via fork/execvp, multi-stage pipelines with pipe/dup2, background jobs with SIGCHLD reaping, and shell variable expansion.</li>
+      <li>Added a TCP client/server layer using sockets and select() so multiple shell instances can exchange messages, with clean process shutdown; built under -Wall -Wextra -Werror with AddressSanitizer and UBSan.</li>
     </ul>
   </div>
 
