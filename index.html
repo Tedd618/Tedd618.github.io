@@ -162,7 +162,7 @@
     .tile-utm    { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/UTM_degree_explorer.png') center/cover; }
     .tile-yose   { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/Yosemite.png') center/cover; }
     .tile-tango  { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/Tango.png') center/cover; }
-    .tile-tamdal { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('images/Tamdal.png') center/cover; }
+    .tile-chalk  { background: linear-gradient(135deg, #6B8E8E 0%, #34474A 100%); }
 
     /* ─── Social icons ──────────────────────────────────── */
     .socials {
@@ -229,7 +229,7 @@
     }
 
     /* ═══════════════════════════════════════════════════════
-       PROJECTS — image grid
+       PROJECTS - image grid
     ═══════════════════════════════════════════════════════ */
     .project-grid {
       display: grid;
@@ -257,8 +257,10 @@
     .project-card.utm    { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/UTM_degree_explorer.png') center/cover; }
     .project-card.yose   { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/Yosemite.png') center/cover; }
     .project-card.tango  { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/Tango.png') center/cover; }
-    .project-card.tamdal { background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%), url('images/Tamdal.png') center/cover; }
     .project-card.paint  { background: linear-gradient(135deg, #B5AE9A 0%, #807A66 100%); }
+    .project-card.chalk  { background: linear-gradient(135deg, #6B8E8E 0%, #34474A 100%); }
+    .project-card.mysh   { background: linear-gradient(135deg, #4A4A52 0%, #24242A 100%); }
+    .project-card.pcm    { background: linear-gradient(135deg, #C99B6B 0%, #8A6239 100%); }
 
     .project-card .pc-name {
       font-family: 'Source Sans 3', 'PT Sans', sans-serif;
@@ -333,7 +335,7 @@
     .project-detail .links a:hover { color: var(--text); }
 
     /* ═══════════════════════════════════════════════════════
-       GALLERY — thumbnail strip + preview
+       GALLERY - thumbnail strip + preview
     ═══════════════════════════════════════════════════════ */
     .gallery-layout {
       display: grid;
@@ -493,7 +495,7 @@
     <div class="about-copy">
       <p>Hi, I'm Taehyeon. I'm a third-year CS student at the <a class="inline" href="https://www.utoronto.ca/" target="_blank" rel="noopener">University of Toronto</a>, and I'm really into DevOps and modern ML.</p>
 
-      <p>I love turning my creative daydreams into real projects. Right now I'm working on a canvas-interactive math tutoring app, and doing some research on the stroke side of it.</p>
+      <p>I love turning my creative daydreams into real projects. My latest one asked whether an AI can learn to teach math by watching real lecture videos. The results were mixed, but I wrote up what I found.</p>
 
       <p>Outside of code, I dance, play music, get pulled into musical theatre, and garden. One day I want to have my own blueberry farm.</p>
 
@@ -506,7 +508,7 @@
         <a class="featured-tile tile-utm"    data-target="projects"><span>UTM Degree<br/>Explorer</span></a>
         <a class="featured-tile tile-yose"   data-target="projects"><span>Yosemite</span></a>
         <a class="featured-tile tile-tango"  data-target="projects"><span>Tango</span></a>
-        <a class="featured-tile tile-tamdal" data-target="projects"><span>Tamdal</span></a>
+        <a class="featured-tile tile-chalk"  data-target="projects"><span>chalk-talk</span></a>
       </div>
     </div>
 
@@ -528,6 +530,10 @@
   <section class="view" id="view-projects">
 
     <div class="project-grid">
+      <a class="project-card chalk"  data-project="chalk">
+        <span class="pc-name">chalk-talk</span>
+        <span class="pc-meta">May – Sep 2026</span>
+      </a>
       <a class="project-card utm"    data-project="utm">
         <span class="pc-name">UTM Degree Explorer</span>
         <span class="pc-meta">May 2026</span>
@@ -536,13 +542,17 @@
         <span class="pc-name">Yosemite</span>
         <span class="pc-meta">Mar 2026 · GenAI Genesis</span>
       </a>
+      <a class="project-card pcm"    data-project="pcm">
+        <span class="pc-name">Painting Classification Model</span>
+        <span class="pc-meta">Winter 2026 · CSC311</span>
+      </a>
+      <a class="project-card mysh"   data-project="mysh">
+        <span class="pc-name">mysh</span>
+        <span class="pc-meta">Winter 2026 · CSC209</span>
+      </a>
       <a class="project-card tango"  data-project="tango">
         <span class="pc-name">Tango</span>
         <span class="pc-meta">Feb 2026 · DeerHacks V</span>
-      </a>
-      <a class="project-card tamdal" data-project="tamdal">
-        <span class="pc-name">Tamdal</span>
-        <span class="pc-meta">2024 – Present</span>
       </a>
       <a class="project-card paint"  data-project="paint">
         <span class="pc-name">Paint Clone</span>
@@ -551,22 +561,17 @@
     </div>
 
     <article class="project-detail" id="project-detail">
-      <h2>UTM Degree Explorer</h2>
-      <p class="pd-meta">May 2026 · Solo · Local-first Degree Planner</p>
-      <p>Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar &mdash; 2,346 courses and 164 programs scraped and parsed into structured ASTs.</p>
+      <h2>chalk-talk</h2>
+      <p class="pd-meta">May – Sep 2026 · Solo research project</p>
+      <p>Can an AI learn to teach math by watching real lecture videos? Built a pipeline that turned 1,191 videos into a dataset pairing speech with handwriting, then tested whether the two help predict each other.</p>
       <div class="tags">
-        <span class="tag">React</span>
-        <span class="tag">TypeScript</span>
-        <span class="tag">Vite</span>
-        <span class="tag">Zustand</span>
-        <span class="tag">Tailwind</span>
-        <span class="tag">Supabase</span>
         <span class="tag">Python</span>
-        <span class="tag">BeautifulSoup</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">Whisper</span>
       </div>
       <div class="links">
-        <a href="https://utm-degree-explorer.vercel.app" target="_blank" rel="noopener">Live →</a>
-        <a href="https://github.com/Tedd618/UTM-Degree-Explorer" target="_blank" rel="noopener">GitHub →</a>
+        <a href="https://github.com/Tedd618/chalk-talk" target="_blank" rel="noopener">GitHub →</a>
       </div>
     </article>
 
@@ -591,7 +596,7 @@
         <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" target="_blank" rel="noopener">Open in new tab →</a>
         <a class="resume-link" href="Taehyeon_Kim_Resume.pdf" download>Download PDF →</a>
       </div>
-      <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#zoom=120&navpanes=0&toolbar=1" title="Taehyeon Kim — Resume"></iframe>
+      <iframe class="resume-frame" src="Taehyeon_Kim_Resume.pdf#zoom=120&navpanes=0&toolbar=1" title="Taehyeon Kim - Resume"></iframe>
     </div>
 
   </section>
@@ -645,30 +650,44 @@
     utm: {
       title: 'UTM Degree Explorer',
       meta: 'May 2026 · Solo · Local-first Degree Planner',
-      desc: 'Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar — 2,346 courses and 164 programs scraped and parsed into structured ASTs.',
+      desc: 'Plans degrees, validates prerequisites, and tracks program progress against the full UTM Academic Calendar. 2,346 courses and 164 programs scraped and parsed into structured ASTs.',
       tags: ['React','TypeScript','Vite','Zustand','Tailwind','Supabase','Python','BeautifulSoup'],
       links: [['Live','https://utm-degree-explorer.vercel.app'],['GitHub','https://github.com/Tedd618/UTM-Degree-Explorer']]
     },
     yose: {
       title: 'Yosemite',
       meta: 'Mar 2026 · GenAI Genesis 2026 · Team of 4',
-      desc: 'Compliance intelligence — sanctions screening, anomaly detection, and geopolitical risk monitoring powered by AI.',
-      tags: ['Rust','Python','PyTorch','scikit-learn','pandas','PostgreSQL','Next.js'],
+      desc: 'AI compliance platform for small businesses. Built the risk dashboard and invoice upload flow, and connected the Gemini API to flag fraud in uploaded documents.',
+      tags: ['Next.js','Gemini API'],
       links: [['Devpost','https://devpost.com/software/arrt'],['GitHub','https://github.com/anthonytoyco/arrt']]
     },
     tango: {
       title: 'Tango',
       meta: 'Feb 2026 · DeerHacks V 2026 · Team of 3',
-      desc: 'Job application, reimagined — Hinge-style mutual matching replacing credential-based screening.',
+      desc: 'A Hinge-style job-matching app where applicants and recruiters swipe on each other, and a match unlocks a chat.',
       tags: ['Next.js','Auth0','FastAPI','PostgreSQL','SQLAlchemy'],
       links: [['Devpost','https://devpost.com/software/tango-s2b6la'],['GitHub','https://github.com/Tedd618/tango']]
     },
-    tamdal: {
-      title: 'Tamdal',
-      meta: '2024 – Present · Team of 3',
-      desc: 'AI-assisted math study platform with layout-aware PDF parsing for complex notation.',
-      tags: ['Full-stack','AI / PDF parsing','LLM integration'],
-      links: []
+    chalk: {
+      title: 'chalk-talk',
+      meta: 'May – Sep 2026 · Solo research project',
+      desc: 'Can an AI learn to teach math by watching real lecture videos? Built a pipeline that turned 1,191 videos into a dataset pairing speech with handwriting, then tested whether the two help predict each other.',
+      tags: ['Python','PyTorch','OpenCV','Whisper'],
+      links: [['GitHub','https://github.com/Tedd618/chalk-talk']]
+    },
+    mysh: {
+      title: 'mysh',
+      meta: 'Winter 2026 · CSC209 Course Project · Individual',
+      desc: 'A Unix shell built from scratch in C: built-in commands, pipelines, background jobs, and shell variables, using low-level process and signal handling.',
+      tags: ['C','Linux','Systems Programming'],
+      links: [['GitHub','https://github.com/Tedd618/mysh']]
+    },
+    pcm: {
+      title: 'Painting Classification Model',
+      meta: 'Winter 2026 · CSC311 Course Project · Team of 4',
+      desc: 'Predicts which of three famous paintings someone is describing from survey responses. Compared how data-cleaning choices affected three types of models; the team\'s final model reached 94% test accuracy.',
+      tags: ['Python','scikit-learn','NumPy'],
+      links: [['GitHub','https://github.com/Tedd618/painting-classification-ml']]
     },
     paint: {
       title: 'Paint Clone',
